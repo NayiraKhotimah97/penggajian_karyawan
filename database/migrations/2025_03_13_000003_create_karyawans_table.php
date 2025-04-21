@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('jabatan');
             $table->decimal('gaji_pokok', 15, 2);
-            $table->string('email')->unique;
+            $table->string('email')->unique();
             $table->timestamps();
         });
     }
