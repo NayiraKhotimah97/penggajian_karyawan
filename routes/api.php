@@ -4,6 +4,8 @@ use App\Http\Controllers\API\AbsensiSwaggerController;
 use App\Http\Controllers\API\CategorySwaggerController;
 use App\Http\Controllers\API\GajiSwaggerController;
 use App\Http\Controllers\API\KaryawanSwaggerController;
+use App\Http\Controllers\API\LaporanPembayaranSwaggerController;
+use App\Http\Controllers\API\RiwayatPembayaranSwaggerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AbsensiController;
@@ -45,4 +47,14 @@ Route::group([], function () {
     Route::get('karyawans/{karyawan}', [KaryawanSwaggerController::class, 'show']);
     Route::put('karyawans/{karyawan}', [KaryawanSwaggerController::class, 'update']);
     Route::delete('karyawans/{karyawan}', [KaryawanSwaggerController::class, 'destroy']);
+});
+
+Route::apiResource('laporan-pembayarans', LaporanPembayaranSwaggerController::class);
+
+Route::group([], function () {
+    Route::get('riwayat-pembayarans', [RiwayatPembayaranSwaggerController::class, 'index']);
+    Route::post('riwayat-pembayarans', [RiwayatPembayaranSwaggerController::class, 'store']);
+    Route::get('riwayat-pembayarans/{id}', [RiwayatPembayaranSwaggerController::class, 'show']);
+    Route::put('riwayat-pembayarans/{id}', [RiwayatPembayaranSwaggerController::class, 'update']);
+    Route::delete('riwayat-pembayarans/{id}', [RiwayatPembayaranSwaggerController::class, 'destroy']);
 });
