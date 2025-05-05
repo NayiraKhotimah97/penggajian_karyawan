@@ -6,6 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Models\LaporanPembayaran;
 use Illuminate\Http\Request;
 
+/**
+ * @OA\Schema(
+ *     schema="LaporanPembayaran",
+ *     type="object",
+ *     required={"periode_Laporan", "jumlah_karyawan", "total_pengeluaran", "rata_rata"},
+ *     @OA\Property(property="id", type="integer", example=1),
+ *     @OA\Property(property="periode_Laporan", type="string", format="date", example="2025-04-01"),
+ *     @OA\Property(property="jumlah_karyawan", type="string", example="10"),
+ *     @OA\Property(property="total_pengeluaran", type="string", example="15000000"),
+ *     @OA\Property(property="rata_rata", type="string", example="1500000"),
+ *     @OA\Property(property="created_at", type="string", format="date-time", example="2025-05-03T12:34:56Z"),
+ *     @OA\Property(property="updated_at", type="string", format="date-time", example="2025-05-03T12:34:56Z")
+ * )
+ */
+
 class LaporanPembayaranSwaggerController extends Controller
 {
     /**

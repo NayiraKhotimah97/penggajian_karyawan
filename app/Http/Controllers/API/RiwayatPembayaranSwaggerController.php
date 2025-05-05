@@ -6,6 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Models\RiwayatPembayaran;
 use Illuminate\Http\Request;
 
+/**
+ * @OA\Schema(
+ *     schema="RiwayatPembayaran",
+ *     type="object",
+ *     required={"id_gaji", "metode_pembayaran", "tanggal_pembayaran", "nominal_pembayaran"},
+ *     @OA\Property(property="id", type="integer", example=1),
+ *     @OA\Property(property="id_gaji", type="integer", example=1),
+ *     @OA\Property(property="metode_pembayaran", type="string", example="Transfer Bank"),
+ *     @OA\Property(property="tanggal_pembayaran", type="string", format="date", example="2025-04-29"),
+ *     @OA\Property(property="nominal_pembayaran", type="number", example=4500000),
+ *     @OA\Property(property="created_at", type="string", format="date-time", example="2025-05-03T12:34:56Z"),
+ *     @OA\Property(property="updated_at", type="string", format="date-time", example="2025-05-03T12:34:56Z")
+ * )
+ */
+
 class RiwayatPembayaranSwaggerController extends Controller
 {
     /**

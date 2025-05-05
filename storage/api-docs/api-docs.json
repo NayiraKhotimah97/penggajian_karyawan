@@ -19,6 +19,226 @@
         }
     ],
     "paths": {
+        "/absensis": {
+            "get": {
+                "tags": [
+                    "Absensi"
+                ],
+                "summary": "List all absensi",
+                "description": "Menampilkan daftar semua absensi",
+                "operationId": "81af7420d3d4be4eb2d6dfcb660a1194",
+                "responses": {
+                    "200": {
+                        "description": "Berhasil mendapatkan data absensi",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Absensi"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Absensi"
+                ],
+                "summary": "Create new absensi",
+                "description": "Membuat data absensi baru",
+                "operationId": "5158bede069018867e0f3231cef7a360",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "karyawan_id",
+                                    "tanggal",
+                                    "jam_masuk",
+                                    "jam_keluar",
+                                    "total_jam_kerja"
+                                ],
+                                "properties": {
+                                    "karyawan_id": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "tanggal": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2025-04-28"
+                                    },
+                                    "jam_masuk": {
+                                        "type": "string",
+                                        "format": "time",
+                                        "example": "08:00"
+                                    },
+                                    "jam_keluar": {
+                                        "type": "string",
+                                        "format": "time",
+                                        "example": "17:00"
+                                    },
+                                    "total_jam_kerja": {
+                                        "type": "number",
+                                        "example": 8
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Berhasil membuat absensi baru",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Absensi"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/absensis/{absensi}": {
+            "get": {
+                "tags": [
+                    "Absensi"
+                ],
+                "summary": "Show a specific absensi",
+                "description": "Menampilkan detail absensi berdasarkan ID",
+                "operationId": "8a95fe34efe78647d95b9510aae68524",
+                "parameters": [
+                    {
+                        "name": "absensi",
+                        "in": "path",
+                        "description": "ID absensi",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detail data absensi",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Absensi"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Absensi not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Absensi"
+                ],
+                "summary": "Update a specific absensi",
+                "description": "Memperbarui data absensi berdasarkan ID",
+                "operationId": "cb8681feafc6b560290b8d89ecd47d96",
+                "parameters": [
+                    {
+                        "name": "absensi",
+                        "in": "path",
+                        "description": "ID absensi",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "karyawan_id",
+                                    "tanggal",
+                                    "jam_masuk",
+                                    "jam_keluar",
+                                    "total_jam_kerja"
+                                ],
+                                "properties": {
+                                    "karyawan_id": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "tanggal": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2025-04-28"
+                                    },
+                                    "jam_masuk": {
+                                        "type": "string",
+                                        "format": "time",
+                                        "example": "08:00"
+                                    },
+                                    "jam_keluar": {
+                                        "type": "string",
+                                        "format": "time",
+                                        "example": "17:00"
+                                    },
+                                    "total_jam_kerja": {
+                                        "type": "number",
+                                        "example": 8
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Berhasil memperbarui absensi",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Absensi"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Absensi"
+                ],
+                "summary": "Delete a specific absensi",
+                "description": "Menghapus data absensi berdasarkan ID",
+                "operationId": "5180ac6383e09b6cf96fd557f85cf5aa",
+                "parameters": [
+                    {
+                        "name": "absensi",
+                        "in": "path",
+                        "description": "ID absensi",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Berhasil menghapus absensi"
+                    }
+                }
+            }
+        },
         "/category": {
             "get": {
                 "tags": [
@@ -52,12 +272,1095 @@
                     }
                 }
             }
+        },
+        "/gajis": {
+            "get": {
+                "tags": [
+                    "Gaji"
+                ],
+                "summary": "List all gaji",
+                "description": "Menampilkan daftar semua data gaji beserta karyawan",
+                "operationId": "70b084ff3313ddf49fca39576bb1a9cf",
+                "responses": {
+                    "200": {
+                        "description": "Berhasil mendapatkan data gaji",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Gaji"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Gaji"
+                ],
+                "summary": "Create new gaji",
+                "description": "Membuat data gaji baru",
+                "operationId": "38547b46de2381846bd532a063a1cafe",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "karyawan_id",
+                                    "periode_gaji",
+                                    "gaji_pokok",
+                                    "total_jam_kerja",
+                                    "bonus",
+                                    "potongan",
+                                    "total_gaji"
+                                ],
+                                "properties": {
+                                    "karyawan_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "periode_gaji": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2025-04-28"
+                                    },
+                                    "gaji_pokok": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 5000000
+                                    },
+                                    "total-jam-kerja": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 160
+                                    },
+                                    "bonus": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 500000
+                                    },
+                                    "potongan": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 200000
+                                    },
+                                    "total_gaji": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 5300000
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Berhasil membuat data gaji",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Gaji"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/gajis/{id}": {
+            "get": {
+                "tags": [
+                    "Gaji"
+                ],
+                "summary": "Show specific gaji",
+                "description": "Menampilkan detail data gaji berdasarkan ID",
+                "operationId": "411447867f9a8bb19c04c55b0ffec8bd",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID data gaji",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detail data gaji",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Gaji"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Gaji not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Gaji"
+                ],
+                "summary": "Update specific gaji",
+                "description": "Memperbarui data gaji berdasarkan ID",
+                "operationId": "a144be6d967d992f5d9117495318ea9f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID data gaji",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "karyawan_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "periode_gaji": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2025-04-28"
+                                    },
+                                    "gaji_pokok": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 5500000
+                                    },
+                                    "total-jam-kerja": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 170
+                                    },
+                                    "bonus": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 600000
+                                    },
+                                    "potongan": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 100000
+                                    },
+                                    "total_gaji": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 6000000
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Berhasil memperbarui data gaji",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Gaji"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Gaji"
+                ],
+                "summary": "Delete specific gaji",
+                "description": "Menghapus data gaji berdasarkan ID",
+                "operationId": "086dd8aa864629a993d670a9206784c8",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID data gaji",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Berhasil menghapus data gaji"
+                    }
+                }
+            }
+        },
+        "/karyawans": {
+            "get": {
+                "tags": [
+                    "Karyawan"
+                ],
+                "summary": "List all karyawan",
+                "description": "Menampilkan daftar semua karyawan",
+                "operationId": "69e45aa66e4f8c21f68a4be812d9ccc8",
+                "responses": {
+                    "200": {
+                        "description": "Berhasil mendapatkan data karyawan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Karyawan"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Karyawan"
+                ],
+                "summary": "Create new karyawan",
+                "description": "Membuat data karyawan baru",
+                "operationId": "37325a7e80370625466df60414cdbd71",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nama",
+                                    "jabatan",
+                                    "gaji_pokok",
+                                    "email"
+                                ],
+                                "properties": {
+                                    "nama": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "jabatan": {
+                                        "type": "string",
+                                        "example": "Manager"
+                                    },
+                                    "gaji_pokok": {
+                                        "type": "number",
+                                        "example": 5000000
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "john@example.com"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Berhasil membuat karyawan baru",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Karyawan"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/karyawans/{karyawan}": {
+            "get": {
+                "tags": [
+                    "Karyawan"
+                ],
+                "summary": "Show a specific karyawan",
+                "description": "Menampilkan detail karyawan berdasarkan ID",
+                "operationId": "fe4a2c07d435f279e95b2586db0d6389",
+                "parameters": [
+                    {
+                        "name": "karyawan",
+                        "in": "path",
+                        "description": "ID karyawan",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detail data karyawan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Karyawan"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Karyawan not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Karyawan"
+                ],
+                "summary": "Update a specific karyawan",
+                "description": "Memperbarui data karyawan berdasarkan ID",
+                "operationId": "534232d060c5ce047be33fc67a91171c",
+                "parameters": [
+                    {
+                        "name": "karyawan",
+                        "in": "path",
+                        "description": "ID karyawan",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nama",
+                                    "jabatan",
+                                    "gaji_pokok",
+                                    "email"
+                                ],
+                                "properties": {
+                                    "nama": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "jabatan": {
+                                        "type": "string",
+                                        "example": "Manager"
+                                    },
+                                    "gaji_pokok": {
+                                        "type": "number",
+                                        "example": 5000000
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "john@example.com"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Berhasil memperbarui karyawan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Karyawan"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Karyawan"
+                ],
+                "summary": "Delete a specific karyawan",
+                "description": "Menghapus data karyawan berdasarkan ID",
+                "operationId": "57b3b01f359725a62207d8c0feb3a9a5",
+                "parameters": [
+                    {
+                        "name": "karyawan",
+                        "in": "path",
+                        "description": "ID karyawan",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Berhasil menghapus karyawan"
+                    }
+                }
+            }
+        },
+        "/laporan-pembayarans": {
+            "get": {
+                "tags": [
+                    "Laporan Pembayaran"
+                ],
+                "summary": "List semua laporan pembayaran",
+                "operationId": "33068c3f922df755c25c920e114bc34c",
+                "responses": {
+                    "200": {
+                        "description": "Data laporan pembayaran berhasil ditampilkan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/LaporanPembayaran"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Laporan Pembayaran"
+                ],
+                "summary": "Buat laporan pembayaran baru",
+                "operationId": "3d51e83f631a692b96c7981d1e410b35",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "periode_Laporan",
+                                    "jumlah_karyawan",
+                                    "total_pengeluaran",
+                                    "rata_rata"
+                                ],
+                                "properties": {
+                                    "periode_Laporan": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2025-04-01"
+                                    },
+                                    "jumlah_karyawan": {
+                                        "type": "string",
+                                        "example": "10"
+                                    },
+                                    "total_pengeluaran": {
+                                        "type": "string",
+                                        "example": "15000000"
+                                    },
+                                    "rata_rata": {
+                                        "type": "string",
+                                        "example": "1500000"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Berhasil membuat laporan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LaporanPembayaran"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/laporan-pembayarans/{laporanPembayaran}": {
+            "get": {
+                "tags": [
+                    "Laporan Pembayaran"
+                ],
+                "summary": "Detail laporan pembayaran",
+                "operationId": "b769a7fbdfac80471d876d4bb08254ad",
+                "parameters": [
+                    {
+                        "name": "laporanPembayaran",
+                        "in": "path",
+                        "description": "ID laporan pembayaran",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detail laporan ditemukan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LaporanPembayaran"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Laporan tidak ditemukan"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Laporan Pembayaran"
+                ],
+                "summary": "Update laporan pembayaran",
+                "operationId": "aac6bdb04ed3b3a5a35c5030d817d325",
+                "parameters": [
+                    {
+                        "name": "laporanPembayaran",
+                        "in": "path",
+                        "description": "ID laporan pembayaran",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "periode_Laporan": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2025-04-01"
+                                    },
+                                    "jumlah_karyawan": {
+                                        "type": "string",
+                                        "example": "12"
+                                    },
+                                    "total_pengeluaran": {
+                                        "type": "string",
+                                        "example": "18000000"
+                                    },
+                                    "rata_rata": {
+                                        "type": "string",
+                                        "example": "1500000"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Laporan berhasil diperbarui",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LaporanPembayaran"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Laporan Pembayaran"
+                ],
+                "summary": "Hapus laporan pembayaran",
+                "operationId": "b7c300ed02f1248c45c31508df954deb",
+                "parameters": [
+                    {
+                        "name": "laporanPembayaran",
+                        "in": "path",
+                        "description": "ID laporan",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Laporan berhasil dihapus"
+                    }
+                }
+            }
+        },
+        "/riwayat-pembayarans": {
+            "get": {
+                "tags": [
+                    "Riwayat Pembayaran"
+                ],
+                "summary": "List all riwayat pembayaran",
+                "description": "Menampilkan daftar semua riwayat pembayaran beserta data gaji",
+                "operationId": "4299bb85733d088b61ac7098303bc1c4",
+                "responses": {
+                    "200": {
+                        "description": "Berhasil mendapatkan daftar riwayat pembayaran",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/RiwayatPembayaran"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Riwayat Pembayaran"
+                ],
+                "summary": "Create new riwayat pembayaran",
+                "description": "Membuat data riwayat pembayaran baru",
+                "operationId": "6881290fc7803880000eca22b1afef40",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id_gaji",
+                                    "metode_pembayaran",
+                                    "tanggal_pembayaran",
+                                    "nominal_pembayaran"
+                                ],
+                                "properties": {
+                                    "id_gaji": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "metode_pembayaran": {
+                                        "type": "string",
+                                        "example": "Transfer Bank"
+                                    },
+                                    "tanggal_pembayaran": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2025-04-29"
+                                    },
+                                    "nominal_pembayaran": {
+                                        "type": "number",
+                                        "example": 4500000
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Berhasil membuat riwayat pembayaran",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RiwayatPembayaran"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/riwayat-pembayarans/{id}": {
+            "get": {
+                "tags": [
+                    "Riwayat Pembayaran"
+                ],
+                "summary": "Show detail riwayat pembayaran",
+                "description": "Menampilkan detail riwayat pembayaran berdasarkan ID",
+                "operationId": "25fa82d484335a97733af7f078064eda",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID riwayat pembayaran",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detail riwayat pembayaran",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RiwayatPembayaran"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Riwayat Pembayaran"
+                ],
+                "summary": "Update riwayat pembayaran",
+                "description": "Memperbarui data riwayat pembayaran",
+                "operationId": "29c70151f6ac247c3d49f6aaf8d084ee",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID riwayat pembayaran",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id_gaji": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "metode_pembayaran": {
+                                        "type": "string",
+                                        "example": "Tunai"
+                                    },
+                                    "tanggal_pembayaran": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2025-04-30"
+                                    },
+                                    "nominal_pembayaran": {
+                                        "type": "number",
+                                        "example": 5000000
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Berhasil memperbarui riwayat pembayaran",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RiwayatPembayaran"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Riwayat Pembayaran"
+                ],
+                "summary": "Delete riwayat pembayaran",
+                "description": "Menghapus data riwayat pembayaran berdasarkan ID",
+                "operationId": "04ff166e440e0b4b4f1cbf12dc0a31e8",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID riwayat pembayaran",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Berhasil menghapus riwayat pembayaran"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Absensi": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "karyawan_id": {
+                        "type": "integer"
+                    },
+                    "tanggal": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "jam_masuk": {
+                        "type": "string",
+                        "format": "time"
+                    },
+                    "jam_keluar": {
+                        "type": "string",
+                        "format": "time"
+                    },
+                    "total_jam_kerja": {
+                        "type": "number",
+                        "format": "float"
+                    }
+                },
+                "type": "object"
+            },
+            "Gaji": {
+                "required": [
+                    "karyawan_id",
+                    "periode_gaji",
+                    "gaji_pokok",
+                    "total_jam_kerja",
+                    "bonus",
+                    "potongan",
+                    "total_gaji"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "ID Gaji",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "karyawan_id": {
+                        "description": "ID Karyawan",
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "periode_gaji": {
+                        "description": "Periode Gaji",
+                        "type": "string",
+                        "format": "date",
+                        "example": "2025-04-28"
+                    },
+                    "gaji_pokok": {
+                        "description": "Gaji Pokok",
+                        "type": "number",
+                        "format": "float",
+                        "example": 5000000
+                    },
+                    "total-jam-kerja": {
+                        "description": "Total Jam Kerja",
+                        "type": "number",
+                        "format": "float",
+                        "example": 160
+                    },
+                    "bonus": {
+                        "description": "Bonus",
+                        "type": "number",
+                        "format": "float",
+                        "example": 500000
+                    },
+                    "potongan": {
+                        "description": "Potongan",
+                        "type": "number",
+                        "format": "float",
+                        "example": 200000
+                    },
+                    "total_gaji": {
+                        "description": "Total Gaji",
+                        "type": "number",
+                        "format": "float",
+                        "example": 5300000
+                    },
+                    "created_at": {
+                        "description": "Waktu Dibuat",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-04-28T08:00:00Z"
+                    },
+                    "updated_at": {
+                        "description": "Waktu Diperbarui",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-04-28T09:00:00Z"
+                    }
+                },
+                "type": "object"
+            },
+            "Karyawan": {
+                "required": [
+                    "nama",
+                    "jabatan",
+                    "gaji_pokok",
+                    "email"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "nama": {
+                        "type": "string",
+                        "example": "John Doe"
+                    },
+                    "jabatan": {
+                        "type": "string",
+                        "example": "Manager"
+                    },
+                    "gaji_pokok": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 5000000
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "john@example.com"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-05-03T12:34:56Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-05-03T12:34:56Z"
+                    }
+                },
+                "type": "object"
+            },
+            "LaporanPembayaran": {
+                "required": [
+                    "periode_Laporan",
+                    "jumlah_karyawan",
+                    "total_pengeluaran",
+                    "rata_rata"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "periode_Laporan": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2025-04-01"
+                    },
+                    "jumlah_karyawan": {
+                        "type": "string",
+                        "example": "10"
+                    },
+                    "total_pengeluaran": {
+                        "type": "string",
+                        "example": "15000000"
+                    },
+                    "rata_rata": {
+                        "type": "string",
+                        "example": "1500000"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-05-03T12:34:56Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-05-03T12:34:56Z"
+                    }
+                },
+                "type": "object"
+            },
+            "RiwayatPembayaran": {
+                "required": [
+                    "id_gaji",
+                    "metode_pembayaran",
+                    "tanggal_pembayaran",
+                    "nominal_pembayaran"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "id_gaji": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "metode_pembayaran": {
+                        "type": "string",
+                        "example": "Transfer Bank"
+                    },
+                    "tanggal_pembayaran": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2025-04-29"
+                    },
+                    "nominal_pembayaran": {
+                        "type": "number",
+                        "example": 4500000
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-05-03T12:34:56Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-05-03T12:34:56Z"
+                    }
+                },
+                "type": "object"
+            }
         }
     },
     "tags": [
         {
+            "name": "Absensi",
+            "description": "Absensi"
+        },
+        {
             "name": "Category",
             "description": "Category"
+        },
+        {
+            "name": "Gaji",
+            "description": "Gaji"
+        },
+        {
+            "name": "Karyawan",
+            "description": "Karyawan"
+        },
+        {
+            "name": "Laporan Pembayaran",
+            "description": "Laporan Pembayaran"
+        },
+        {
+            "name": "Riwayat Pembayaran",
+            "description": "Riwayat Pembayaran"
         }
     ]
 }

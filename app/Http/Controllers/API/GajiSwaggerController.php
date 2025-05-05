@@ -6,6 +6,24 @@ use App\Http\Controllers\Controller;
 use App\Models\Gaji;
 use Illuminate\Http\Request;
 
+/**
+ * @OA\Schema(
+ *     schema="Gaji",
+ *     type="object",
+ *     required={"karyawan_id", "periode_gaji", "gaji_pokok", "total_jam_kerja", "bonus", "potongan", "total_gaji"},
+ *     @OA\Property(property="id", type="integer", description="ID Gaji", example=1),
+ *     @OA\Property(property="karyawan_id", type="integer", description="ID Karyawan", example=2),
+ *     @OA\Property(property="periode_gaji", type="string", format="date", description="Periode Gaji", example="2025-04-28"),
+ *     @OA\Property(property="gaji_pokok", type="number", format="float", description="Gaji Pokok", example=5000000),
+ *     @OA\Property(property="total-jam-kerja", type="number", format="float", description="Total Jam Kerja", example=160),
+ *     @OA\Property(property="bonus", type="number", format="float", description="Bonus", example=500000),
+ *     @OA\Property(property="potongan", type="number", format="float", description="Potongan", example=200000),
+ *     @OA\Property(property="total_gaji", type="number", format="float", description="Total Gaji", example=5300000),
+ *     @OA\Property(property="created_at", type="string", format="date-time", description="Waktu Dibuat", example="2025-04-28T08:00:00Z"),
+ *     @OA\Property(property="updated_at", type="string", format="date-time", description="Waktu Diperbarui", example="2025-04-28T09:00:00Z")
+ * )
+ */
+
 class GajiSwaggerController extends Controller
 {
     /**
@@ -40,7 +58,7 @@ class GajiSwaggerController extends Controller
      *             @OA\Property(property="karyawan_id", type="integer", example=1),
      *             @OA\Property(property="periode_gaji", type="string", format="date", example="2025-04-28"),
      *             @OA\Property(property="gaji_pokok", type="number", format="float", example=5000000),
-     *             @OA\Property(property="total_jam_kerja", type="number", format="float", example=160),
+     *             @OA\Property(property="total-jam-kerja", type="number", format="float", example=160),
      *             @OA\Property(property="bonus", type="number", format="float", example=500000),
      *             @OA\Property(property="potongan", type="number", format="float", example=200000),
      *             @OA\Property(property="total_gaji", type="number", format="float", example=5300000)
@@ -59,7 +77,7 @@ class GajiSwaggerController extends Controller
             'karyawan_id' => 'required|exists:karyawans,id',
             'periode_gaji' => 'required|date',
             'gaji_pokok' => 'required|numeric',
-            'total_jam_kerja' => 'required|numeric',
+            'total-jam-kerja' => 'required|numeric',
             'bonus' => 'required|numeric',
             'potongan' => 'required|numeric',
             'total_gaji' => 'required|numeric',
@@ -115,7 +133,7 @@ class GajiSwaggerController extends Controller
      *             @OA\Property(property="karyawan_id", type="integer", example=1),
      *             @OA\Property(property="periode_gaji", type="string", format="date", example="2025-04-28"),
      *             @OA\Property(property="gaji_pokok", type="number", format="float", example=5500000),
-     *             @OA\Property(property="total_jam_kerja", type="number", format="float", example=170),
+     *             @OA\Property(property="total-jam-kerja", type="number", format="float", example=170),
      *             @OA\Property(property="bonus", type="number", format="float", example=600000),
      *             @OA\Property(property="potongan", type="number", format="float", example=100000),
      *             @OA\Property(property="total_gaji", type="number", format="float", example=6000000)
@@ -134,7 +152,7 @@ class GajiSwaggerController extends Controller
             'karyawan_id' => 'sometimes|required|exists:karyawans,id',
             'periode_gaji' => 'sometimes|required|date',
             'gaji_pokok' => 'sometimes|required|numeric',
-            'total_jam_kerja' => 'sometimes|required|numeric',
+            'total-jam-kerja' => 'sometimes|required|numeric',
             'bonus' => 'sometimes|required|numeric',
             'potongan' => 'sometimes|required|numeric',
             'total_gaji' => 'sometimes|required|numeric',

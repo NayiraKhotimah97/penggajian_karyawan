@@ -6,6 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Models\Absensi;
 use Illuminate\Http\Request;
 
+/**
+ * @OA\Schema(
+ *     schema="Absensi",
+ *     type="object",
+ *     properties={
+ *         @OA\Property(property="id", type="integer"),
+ *         @OA\Property(property="karyawan_id", type="integer"),
+ *         @OA\Property(property="tanggal", type="string", format="date"),
+ *         @OA\Property(property="jam_masuk", type="string", format="time"),
+ *         @OA\Property(property="jam_keluar", type="string", format="time"),
+ *         @OA\Property(property="total_jam_kerja", type="number", format="float")
+ *     }
+ * )
+ */
+
 class AbsensiSwaggerController extends Controller
 {
     /**

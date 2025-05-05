@@ -6,6 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Models\Karyawan;
 use Illuminate\Http\Request;
 
+/**
+ * @OA\Schema(
+ *     schema="Karyawan",
+ *     type="object",
+ *     required={"nama", "jabatan", "gaji_pokok", "email"},
+ *     @OA\Property(property="id", type="integer", example=1),
+ *     @OA\Property(property="nama", type="string", example="John Doe"),
+ *     @OA\Property(property="jabatan", type="string", example="Manager"),
+ *     @OA\Property(property="gaji_pokok", type="number", format="float", example=5000000),
+ *     @OA\Property(property="email", type="string", format="email", example="john@example.com"),
+ *     @OA\Property(property="created_at", type="string", format="date-time", example="2025-05-03T12:34:56Z"),
+ *     @OA\Property(property="updated_at", type="string", format="date-time", example="2025-05-03T12:34:56Z")
+ * )
+ */
+
 class KaryawanSwaggerController extends Controller
 {
     /**
