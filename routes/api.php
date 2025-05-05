@@ -6,6 +6,8 @@ use App\Http\Controllers\API\GajiSwaggerController;
 use App\Http\Controllers\API\KaryawanSwaggerController;
 use App\Http\Controllers\API\LaporanPembayaranSwaggerController;
 use App\Http\Controllers\API\RiwayatPembayaranSwaggerController;
+use App\Http\Controllers\API\DepartemenSwaggerController;
+use App\Http\Controllers\DepartemenController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AbsensiController;
@@ -19,6 +21,7 @@ Route::apiResource('riwayat-pembayarans', RiwayatPembayaranController::class);
 Route::apiResource('gajis', GajiController::class);
 Route::apiResource('karyawans', KaryawanController::class);
 Route::resource('absensis', AbsensiController::class);
+Route::resource('departemen', DepartemenController::class);
 
 
 Route::group([], function () {
@@ -57,4 +60,12 @@ Route::group([], function () {
     Route::get('riwayat-pembayarans/{id}', [RiwayatPembayaranSwaggerController::class, 'show']);
     Route::put('riwayat-pembayarans/{id}', [RiwayatPembayaranSwaggerController::class, 'update']);
     Route::delete('riwayat-pembayarans/{id}', [RiwayatPembayaranSwaggerController::class, 'destroy']);
+});
+
+Route::group([], function () {
+    Route::get('departemens', [DepartemenSwaggerController::class, 'index']);
+    Route::post('departemens', [DepartemenSwaggerController::class, 'store']);
+    Route::get('departemens/{id}', [DepartemenSwaggerController::class, 'show']);
+    Route::put('departemens/{id}', [DepartemenSwaggerController::class, 'update']);
+    Route::delete('departemens/{id}', [DepartemenSwaggerController::class, 'destroy']);
 });

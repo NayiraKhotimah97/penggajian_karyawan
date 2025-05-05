@@ -273,6 +273,183 @@
                 }
             }
         },
+        "/api/departemen-swagger": {
+            "get": {
+                "tags": [
+                    "DepartemenSwagger"
+                ],
+                "summary": "Menampilkan semua departemen (simulasi)",
+                "operationId": "53a963e7488cdab3cd4c4efa707a21b4",
+                "responses": {
+                    "200": {
+                        "description": "Data departemen ditemukan"
+                    },
+                    "500": {
+                        "description": "Kesalahan server"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "DepartemenSwagger"
+                ],
+                "summary": "Membuat departemen baru (simulasi)",
+                "operationId": "ac739f04e4c32e1b8dfc5f7a5c1de012",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nama_departemen",
+                                    "kepala_departemen",
+                                    "jumlah_karyawan",
+                                    "keterangan"
+                                ],
+                                "properties": {
+                                    "nama_departemen": {
+                                        "type": "string"
+                                    },
+                                    "kepala_departemen": {
+                                        "type": "string"
+                                    },
+                                    "jumlah_karyawan": {
+                                        "type": "integer"
+                                    },
+                                    "keterangan": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Departemen berhasil dibuat"
+                    },
+                    "400": {
+                        "description": "Permintaan tidak valid"
+                    },
+                    "500": {
+                        "description": "Kesalahan server"
+                    }
+                }
+            }
+        },
+        "/api/departemen-swagger/{id}": {
+            "get": {
+                "tags": [
+                    "DepartemenSwagger"
+                ],
+                "summary": "Menampilkan detail departemen",
+                "operationId": "e53afced54200f188d0ed871bd84c098",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Data departemen ditemukan"
+                    },
+                    "404": {
+                        "description": "Departemen tidak ditemukan"
+                    },
+                    "500": {
+                        "description": "Kesalahan server"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "DepartemenSwagger"
+                ],
+                "summary": "Memperbarui departemen (simulasi)",
+                "operationId": "c779f02360800e3e64421541116942e1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nama_departemen": {
+                                        "type": "string"
+                                    },
+                                    "kepala_departemen": {
+                                        "type": "string"
+                                    },
+                                    "jumlah_karyawan": {
+                                        "type": "integer"
+                                    },
+                                    "keterangan": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Departemen berhasil diperbarui"
+                    },
+                    "404": {
+                        "description": "Departemen tidak ditemukan"
+                    },
+                    "400": {
+                        "description": "Permintaan tidak valid"
+                    },
+                    "500": {
+                        "description": "Kesalahan server"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "DepartemenSwagger"
+                ],
+                "summary": "Menghapus departemen (simulasi)",
+                "operationId": "c25ac20c4bdfd34fbe93798d1df903c3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Departemen berhasil dihapus"
+                    },
+                    "404": {
+                        "description": "Departemen tidak ditemukan"
+                    },
+                    "500": {
+                        "description": "Kesalahan server"
+                    }
+                }
+            }
+        },
         "/gajis": {
             "get": {
                 "tags": [
@@ -1338,6 +1515,10 @@
         }
     },
     "tags": [
+        {
+            "name": "DepartemenSwagger",
+            "description": "API simulasi Departemen dengan dokumentasi Swagger"
+        },
         {
             "name": "Absensi",
             "description": "Absensi"
