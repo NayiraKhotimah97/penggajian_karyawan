@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('karyawans', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('departemen_id');
             $table->string('nama');
             $table->string('jabatan');
             $table->decimal('gaji_pokok', 15, 2);
             $table->string('email')->unique();
+            $table->text('alamat')->nullable();
+            $table->string('no_telepon', 20)->nullable();
             $table->timestamps();
         });
     }

@@ -18,10 +18,13 @@ class KaryawanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'departemen_id' => 'required|exists:departemens,id',
             'nama' => 'required|string|max:255',
             'jabatan' => 'required|string|max:255',
             'gaji_pokok' => 'required|numeric|unique:karyawans,gaji_pokok',
             'email' => 'required|email|unique:karyawans,email',
+            'alamat' => 'nullable|string',
+            'no_telepon' => 'nullable|string|max:20',
         ]);
 
         $karyawan = Karyawan::create($request->all());
@@ -39,10 +42,13 @@ class KaryawanController extends Controller
     public function update(Request $request, Karyawan $karyawan)
     {
         $request->validate([
+            'departemen_id' => 'required|exists:departemens,id',
             'nama' => 'sometimes|required|string|max:255',
             'jabatan' => 'sometimes|required|string|max:255',
             'gaji_pokok' => 'sometimes|required|numeric|unique:karyawans,gaji_pokok,' . $karyawan->id,
             'email' => 'sometimes|required|email|unique:karyawans,email,' . $karyawan->id,
+            'alamat' => 'nullable|string',
+            'no_telepon' => 'nullable|string|max:20',
         ]);
 
         $karyawan->update($request->all());
