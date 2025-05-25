@@ -7,6 +7,9 @@ use App\Http\Controllers\API\KaryawanSwaggerController;
 use App\Http\Controllers\API\LaporanPembayaranSwaggerController;
 use App\Http\Controllers\API\RiwayatPembayaranSwaggerController;
 use App\Http\Controllers\API\DepartemenSwaggerController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DepartemenController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -114,3 +117,18 @@ Route::group([], function () {
     Route::put('departemens/{id}', [DepartemenSwaggerController::class, 'update']);
     Route::delete('departemens/{id}', [DepartemenSwaggerController::class, 'destroy']);
 });
+
+
+// Auth
+Route::get('/user', function (Request $request) {
+    return $request->user();
+})->middleware('auth:sanctum');
+
+// Register
+Route::post('/register', RegisterController::class);
+
+// Login
+Route::post('/login', LoginController::class);
+
+// Logout
+Route::post('/logout', LogoutController::class)->middleware('auth:sanctum');
