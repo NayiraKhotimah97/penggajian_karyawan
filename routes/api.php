@@ -16,14 +16,59 @@ use App\Http\Controllers\GajiController;
 use App\Http\Controllers\RiwayatPembayaranController;
 use App\Http\Controllers\LaporanPembayaranController;
 
-Route::apiResource('laporan-pembayarans', LaporanPembayaranController::class);
-Route::apiResource('riwayat-pembayarans', RiwayatPembayaranController::class);
-Route::apiResource('gajis', GajiController::class);
-Route::apiResource('karyawans', KaryawanController::class);
-Route::resource('absensis', AbsensiController::class);
-Route::resource('departemen', DepartemenController::class);
+Route::group([], function () {
+    Route::get('laporan-pembayarans', [LaporanPembayaranController::class, 'index']);
+    Route::post('laporan-pembayarans', [LaporanPembayaranController::class, 'store']);
+    Route::get('laporan-pembayarans/{id}', [LaporanPembayaranController::class, 'show']);
+    Route::put('laporan-pembayarans/{id}', [LaporanPembayaranController::class, 'update']);
+    Route::delete('laporan-pembayarans/{id}', [LaporanPembayaranController::class, 'destroy']);
+});
+
+Route::group([], function () {
+    Route::get('riwayat-pembayarans', [RiwayatPembayaranController::class, 'index']);
+    Route::post('riwayat-pembayarans', [RiwayatPembayaranController::class, 'store']);
+    Route::get('riwayat-pembayarans/{riwayat_pembayaran}', [RiwayatPembayaranController::class, 'show']);
+    Route::put('riwayat-pembayarans/{riwayat_pembayaran}', [RiwayatPembayaranController::class, 'update']);
+    Route::delete('riwayat-pembayarans/{riwayat_pembayaran}', [RiwayatPembayaranController::class, 'destroy']);
+});
+
+Route::group([], function () {
+    Route::get('gajis', [GajiController::class, 'index']);
+    Route::post('gajis', [GajiController::class, 'store']);
+    Route::get('gajis/{id}', [GajiController::class, 'show']);
+    Route::put('gajis/{id}', [GajiController::class, 'update']);
+    Route::delete('gajis/{id}', [GajiController::class, 'destroy']);
+});
+
+Route::group([], function () {
+    Route::get('karyawans', [KaryawanController::class, 'index']);
+    Route::post('karyawans', [KaryawanController::class, 'store']);
+    Route::get('karyawans/{karyawan}', [KaryawanController::class, 'show']);
+    Route::put('karyawans/{karyawan}', [KaryawanController::class, 'update']);
+    Route::delete('karyawans/{karyawan}', [KaryawanController::class, 'destroy']);
+});
+
+Route::group([], function () {
+    Route::get('absensis', [AbsensiController::class, 'index']);
+    Route::post('absensis', [AbsensiController::class, 'store']);
+    Route::get('absensis/{absensi}', [AbsensiController::class, 'show']);
+    Route::put('absensis/{absensi}', [AbsensiController::class, 'update']);
+    Route::delete('absensis/{absensi}', [AbsensiController::class, 'destroy']);
+});
 
 
+Route::group([], function () {
+    Route::get('departemen', [DepartemenController::class, 'index']);
+    Route::post('departemen', [DepartemenController::class, 'store']);
+    Route::get('departemen/{id}', [DepartemenController::class, 'show']);
+    Route::put('departemen/{id}', [DepartemenController::class, 'update']);
+    Route::delete('departemen/{id}', [DepartemenController::class, 'destroy']);
+});
+
+
+
+
+// SWAGGER CONTROLLER ROUTE
 Route::group([], function () {
     Route::get('category', [CategorySwaggerController::class, 'listCategory']);
 });
