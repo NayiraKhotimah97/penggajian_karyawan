@@ -9,10 +9,11 @@ class DepartemenController extends Controller
 {
     // Menampilkan daftar departemen
     public function index()
-    {
-        $karyawans = Departemen::all();
-        return response()->json($karyawans);
-    }
+{
+    $departemens = Departemen::all(); 
+    return response()->json($departemens);
+}
+
 
     // Menyimpan departemen baru
     public function store(Request $request)
@@ -56,4 +57,11 @@ class DepartemenController extends Controller
         $departemen->delete();
         return response()->json(null, 204);
     }
+
+    //menampilkan data lengkap 1 departemen dan karyawannya
+    public function getKaryawanByDepartemen($id)
+    {
+    $departemen = Departemen::with('karyawans')->find($id);
+    return response()->json($departemen);
+    }  
 }

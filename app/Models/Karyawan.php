@@ -7,11 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Karyawan extends Model
 {
-
     use HasFactory;
 
-    // Tentukan nama tabel jika tidak sesuai dengan konvensi Laravel
-    protected $table = 'departemens';
+    protected $table = 'karyawans'; // atau nama yang sesuai di database
 
     protected $fillable = [
         'departemen_id',
@@ -23,11 +21,9 @@ class Karyawan extends Model
         'no_telepon'
     ];
 
-    // Definisikan relasi dengan model Departemen
-    public function karyawan()
+    // Relasi ke Departemen
+    public function departemen()
     {
-        return $this->belongsTo(Departemen::class, 'departemen_id');
+        return $this->belongsTo(Departemen::class, 'id_departemen');
     }
-
-    // Anda dapat menambahkan metode lain sesuai kebutuhan
 }

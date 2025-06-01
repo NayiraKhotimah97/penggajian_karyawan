@@ -77,6 +77,7 @@ Route::group([], function () {
     Route::get('departemen/{id}', [DepartemenController::class, 'show']);
     Route::put('departemen/{id}', [DepartemenController::class, 'update']);
     Route::delete('departemen/{id}', [DepartemenController::class, 'destroy']);
+    Route::get('/departemen/{id}/karyawan', [DepartemenController::class, 'getKaryawanByDepartemen']);
 });
 
 
