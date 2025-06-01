@@ -70,4 +70,18 @@ class AbsensiController extends Controller
         $absensi->delete();
         return response()->json(null, 204);
     }
+
+    // Menampilkan daftar absensi berdasarkan karyawan
+    public function getByKaryawan($karyawan_id)
+    {
+        $absensis = Absensi::where('karyawan_id', $karyawan_id)->get();
+        return response()->json($absensis);
+    }
+
+    // Menampilkan daftar absensi berdasarkan tanggal
+    public function getByTanggal($tanggal)
+    {
+        $absensis = Absensi::where('tanggal', $tanggal)->get();
+        return response()->json($absensis);
+    }
 }

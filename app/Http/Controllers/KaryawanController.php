@@ -62,4 +62,24 @@ class KaryawanController extends Controller
         $karyawan->delete();
         return response()->json(null, 204);
     }
+
+    // Menampilkan daftar karyawan berdasarkan departemen
+    public function getByDepartemen($departemen_id)
+    {
+        $karyawans = Karyawan::where('departemen_id', $departemen_id)->get();
+        return response()->json($karyawans);
+    }
+
+    // Mencari karyawan berdasarkan nama (partial match)
+    public function searchByName(Request $request)
+    {
+        $request->validate([
+            'q' => 'required|string',
+        ]);
+
+        $query = $request->input('q');
+        $karyawans = Karyawan::where('nama', 'like', '%' . $query . '%')->get();
+
+        return response()->json($karyawans);
+    }
 }

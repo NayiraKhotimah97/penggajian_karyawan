@@ -41,6 +41,8 @@ Route::group([], function () {
     Route::get('gajis/{id}', [GajiController::class, 'show']);
     Route::put('gajis/{id}', [GajiController::class, 'update']);
     Route::delete('gajis/{id}', [GajiController::class, 'destroy']);
+    Route::get('/gajis/karyawan/{karyawan_id}', [GajiController::class, 'getByKaryawan']);
+    Route::get('/gajis/periode', [GajiController::class, 'getByPeriode']);
 });
 
 Route::group([], function () {
@@ -49,6 +51,8 @@ Route::group([], function () {
     Route::get('karyawans/{karyawan}', [KaryawanController::class, 'show']);
     Route::put('karyawans/{karyawan}', [KaryawanController::class, 'update']);
     Route::delete('karyawans/{karyawan}', [KaryawanController::class, 'destroy']);
+    Route::get('/karyawans/departemen/{departemen_id}', [KaryawanController::class, 'getByDepartemen']);
+    Route::get('/karyawans/search', [KaryawanController::class, 'searchByName']);
 });
 
 Route::group([], function () {
@@ -57,6 +61,8 @@ Route::group([], function () {
     Route::get('absensis/{absensi}', [AbsensiController::class, 'show']);
     Route::put('absensis/{absensi}', [AbsensiController::class, 'update']);
     Route::delete('absensis/{absensi}', [AbsensiController::class, 'destroy']);
+    Route::get('/absensis/karyawan/{karyawan_id}', [AbsensiController::class, 'getByKaryawan']);
+    Route::get('/absensis/tanggal/{tanggal}', [AbsensiController::class, 'getByTanggal']);
 });
 
 
