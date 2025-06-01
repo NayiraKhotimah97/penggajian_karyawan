@@ -56,4 +56,28 @@ class RiwayatPembayaranController extends Controller
         $riwayatPembayaran->delete();
         return response()->json(null, 204);
     }
+
+    // Mendapatkan riwayat pembayaran berdasarkan tanggal tertentu
+    public function getByTanggal(Request $request)
+    {
+        $request->validate([
+            'tanggal' => 'required|date',
+        ]);
+
+        $tanggal = $request->input('tanggal');
+
+        $riwayat = RiwayatPembayaran::whereDate('tanggal_pembayaran', $tanggal)->get();
+
+        return response()->json($riwayat);
+    }
+
+    // Menghitung total nominal pembayaran dari semua riwayat
+    public function getTotalNominal()
+    {
+        $totalNominal = RiwayatPembayaran::sum('nominal_pembayaran');
+
+        return response()->json([
+            'total_nominal_pembayaran' => $totalNominal
+        ]);
+    }
 }

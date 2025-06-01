@@ -25,6 +25,8 @@ Route::group([], function () {
     Route::get('laporan-pembayarans/{id}', [LaporanPembayaranController::class, 'show']);
     Route::put('laporan-pembayarans/{id}', [LaporanPembayaranController::class, 'update']);
     Route::delete('laporan-pembayarans/{id}', [LaporanPembayaranController::class, 'destroy']);
+    Route::get('/laporan-pembayarans/periode', [LaporanPembayaranController::class, 'getByPeriode']);
+    Route::get('/laporan-pembayarans/total-pengeluaran', [LaporanPembayaranController::class, 'getTotalPengeluaran']);
 });
 
 Route::group([], function () {
@@ -33,6 +35,9 @@ Route::group([], function () {
     Route::get('riwayat-pembayarans/{riwayat_pembayaran}', [RiwayatPembayaranController::class, 'show']);
     Route::put('riwayat-pembayarans/{riwayat_pembayaran}', [RiwayatPembayaranController::class, 'update']);
     Route::delete('riwayat-pembayarans/{riwayat_pembayaran}', [RiwayatPembayaranController::class, 'destroy']);
+    Route::get('/riwayat-pembayarans/by-tanggal', [RiwayatPembayaranController::class, 'getByTanggal']);
+    Route::get('/riwayat-pembayarans/total-nominal', [RiwayatPembayaranController::class, 'getTotalNominal']);
+
 });
 
 Route::group([], function () {

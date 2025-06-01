@@ -56,4 +56,28 @@ class LaporanPembayaranController extends Controller
         $laporanPembayaran->delete();
         return response()->json(null, 204);
     }
+
+    // Menampilkan laporan berdasarkan periode (YYYY-MM)
+    public function getByPeriode(Request $request)
+    {
+        $request->validate([
+            'periode' => 'required|date_format:Y-m', // Contoh: 2025-06
+        ]);
+
+        $periode = $request->input('periode');
+
+        $laporan = LaporanPembayaran::whereRaw("DATE_FORMAT(periode_Laporan, '%Y-%m') = ?", [$periode])->get();
+
+        return response()->json($laporan);
+    }
+
+    // Menghitung total pengeluaran dari semua laporan pembayaran
+    public function getTotalPengeluaran()
+    {
+        $totalPengeluaran = LaporanPembayaran::sum('total_pengeluaran');
+
+        return response()->json([
+            'total_pengeluaran' => $totalPengeluaran
+        ]);
+    }
 }
