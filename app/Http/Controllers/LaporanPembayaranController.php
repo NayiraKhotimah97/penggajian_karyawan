@@ -30,10 +30,19 @@ class LaporanPembayaranController extends Controller
     }
 
     // Menampilkan detail laporan pembayaran
-    public function show(LaporanPembayaran $laporanPembayaran)
-    {
-        return response()->json($laporanPembayaran);
+    public function show($id)
+{
+    $laporanPembayaran = LaporanPembayaran::find($id);
+
+    if (!$laporanPembayaran) {
+        return response()->json([
+            'status' => 'not_found',
+            'message' => 'Laporan tidak ditemukan.'
+        ], 404);
     }
+
+    return response()->json($laporanPembayaran);
+}
 
     // Memperbarui laporan pembayaran
     public function update(Request $request, LaporanPembayaran $laporanPembayaran)

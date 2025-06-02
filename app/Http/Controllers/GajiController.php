@@ -25,6 +25,7 @@ class GajiController extends Controller
             'bonus' => 'required|numeric',
             'potongan' => 'required|numeric',
             'total_gaji' => 'required|numeric',
+
         ]);
 
         $gaji = Gaji::create($request->all());
@@ -67,20 +68,6 @@ class GajiController extends Controller
     public function getByKaryawan($karyawan_id)
     {
         $gajis = Gaji::where('karyawan_id', $karyawan_id)->with('karyawan')->get();
-        return response()->json($gajis);
-    }
-
-    // Menampilkan daftar gaji berdasarkan periode (bulan-tahun)
-    public function getByPeriode(Request $request)
-    {
-        $request->validate([
-            'periode' => 'required|date_format:Y-m', // Format periode: YYYY-MM
-        ]);
-
-        $periode = $request->input('periode');
-
-        $gajis = Gaji::whereRaw("DATE_FORMAT(periode_gaji, '%Y-%m') = ?", [$periode])->with('karyawan')->get();
-
         return response()->json($gajis);
     }
 }

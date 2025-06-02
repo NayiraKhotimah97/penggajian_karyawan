@@ -47,7 +47,6 @@ Route::group([], function () {
     Route::put('gajis/{id}', [GajiController::class, 'update']);
     Route::delete('gajis/{id}', [GajiController::class, 'destroy']);
     Route::get('/gajis/karyawan/{karyawan_id}', [GajiController::class, 'getByKaryawan']);
-    Route::get('/gajis/periode', [GajiController::class, 'getByPeriode']);
 });
 
 Route::group([], function () {
@@ -57,7 +56,6 @@ Route::group([], function () {
     Route::put('karyawans/{karyawan}', [KaryawanController::class, 'update']);
     Route::delete('karyawans/{karyawan}', [KaryawanController::class, 'destroy']);
     Route::get('/karyawans/departemen/{departemen_id}', [KaryawanController::class, 'getByDepartemen']);
-    Route::get('/karyawans/search', [KaryawanController::class, 'searchByName']);
 });
 
 Route::group([], function () {
