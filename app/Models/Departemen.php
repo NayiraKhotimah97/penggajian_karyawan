@@ -21,8 +21,8 @@ class Departemen extends Model
     /**
      * Relasi: Satu departemen memiliki banyak karyawan
      */
-    public function karyawans()
+    public function karyawan() // pakai bentuk tunggal untuk relasi
     {
-        return $this->hasMany(Karyawan::class, 'id_departemen');
+    return $this->hasMany(Karyawan::class, 'departemen_id'); // benar
     }
 }

@@ -24,6 +24,6 @@ class Karyawan extends Model
     // Relasi ke Departemen
     public function departemen()
     {
-        return $this->belongsTo(Departemen::class, 'id_departemen');
+    return $this->belongsTo(Departemen::class, 'id_departemen');
     }
 }

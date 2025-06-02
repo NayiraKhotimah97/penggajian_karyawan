@@ -61,7 +61,7 @@ class DepartemenController extends Controller
     //menampilkan data lengkap 1 departemen dan karyawannya
     public function getKaryawanByDepartemen($id)
     {
-    $departemen = Departemen::with('karyawans')->find($id);
+    $departemen = Departemen::with('karyawan')->find($id); // bentuk tunggal
     return response()->json($departemen);
     }
 }

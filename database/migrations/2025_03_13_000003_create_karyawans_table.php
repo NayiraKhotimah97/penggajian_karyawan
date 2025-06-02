@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('karyawans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('departemen_id');
+            $table->foreignId('departemen_id')->constrained('departemens')->onDelete('cascade');
             $table->string('nama');
             $table->string('jabatan');
             $table->decimal('gaji_pokok', 15, 2);
