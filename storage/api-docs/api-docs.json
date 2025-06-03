@@ -860,15 +860,20 @@
                         "application/json": {
                             "schema": {
                                 "required": [
+                                    "departemen_id",
                                     "nama",
                                     "jabatan",
                                     "gaji_pokok",
                                     "email"
                                 ],
                                 "properties": {
+                                    "departemen_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
                                     "nama": {
                                         "type": "string",
-                                        "example": "John Doe"
+                                        "example": "Lis"
                                     },
                                     "jabatan": {
                                         "type": "string",
@@ -876,11 +881,19 @@
                                     },
                                     "gaji_pokok": {
                                         "type": "number",
-                                        "example": 5000000
+                                        "example": "8.00"
                                     },
                                     "email": {
                                         "type": "string",
-                                        "example": "john@example.com"
+                                        "example": "lis@gmail.com"
+                                    },
+                                    "alamat": {
+                                        "type": "string",
+                                        "example": "kober, purwokerto"
+                                    },
+                                    "no_telepon": {
+                                        "type": "string",
+                                        "example": "0821323545122"
                                     }
                                 },
                                 "type": "object"
@@ -960,16 +973,14 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [
-                                    "nama",
-                                    "jabatan",
-                                    "gaji_pokok",
-                                    "email"
-                                ],
                                 "properties": {
+                                    "departemen_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
                                     "nama": {
                                         "type": "string",
-                                        "example": "John Doe"
+                                        "example": "Lis"
                                     },
                                     "jabatan": {
                                         "type": "string",
@@ -977,11 +988,19 @@
                                     },
                                     "gaji_pokok": {
                                         "type": "number",
-                                        "example": 5000000
+                                        "example": "8.00"
                                     },
                                     "email": {
                                         "type": "string",
-                                        "example": "john@example.com"
+                                        "example": "lis@gmail.com"
+                                    },
+                                    "alamat": {
+                                        "type": "string",
+                                        "example": "kober, purwokerto"
+                                    },
+                                    "no_telepon": {
+                                        "type": "string",
+                                        "example": "0821323545122"
                                     }
                                 },
                                 "type": "object"
@@ -1140,13 +1159,13 @@
                         "application/json": {
                             "schema": {
                                 "required": [
-                                    "periode_Laporan",
+                                    "periode_laporan",
                                     "jumlah_karyawan",
                                     "total_pengeluaran",
                                     "rata_rata"
                                 ],
                                 "properties": {
-                                    "periode_Laporan": {
+                                    "periode_laporan": {
                                         "type": "string",
                                         "format": "date",
                                         "example": "2025-04-01"
@@ -1240,7 +1259,7 @@
                         "application/json": {
                             "schema": {
                                 "properties": {
-                                    "periode_Laporan": {
+                                    "periode_laporan": {
                                         "type": "string",
                                         "format": "date",
                                         "example": "2025-04-01"

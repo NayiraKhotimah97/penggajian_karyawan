@@ -51,11 +51,14 @@ class KaryawanSwaggerController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             required={"nama", "jabatan", "gaji_pokok", "email"},
-     *             @OA\Property(property="nama", type="string", example="John Doe"),
+     *             required={"departemen_id", "nama", "jabatan", "gaji_pokok", "email"},
+     *             @OA\Property(property="departemen_id", type="integer", example=1),
+     *             @OA\Property(property="nama", type="string", example="Lis"),
      *             @OA\Property(property="jabatan", type="string", example="Manager"),
-     *             @OA\Property(property="gaji_pokok", type="number", example=5000000),
-     *             @OA\Property(property="email", type="string", example="john@example.com")
+     *             @OA\Property(property="gaji_pokok", type="number", example="8.00"),
+     *             @OA\Property(property="email", type="string", example="lis@gmail.com"),
+     *             @OA\Property(property="alamat", type="string", example="kober, purwokerto"),
+     *             @OA\Property(property="no_telepon", type="string", example="0821323545122")
      *         )
      *     ),
      *     @OA\Response(
@@ -124,11 +127,13 @@ class KaryawanSwaggerController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             required={"nama", "jabatan", "gaji_pokok", "email"},
-     *             @OA\Property(property="nama", type="string", example="John Doe"),
+     *             @OA\Property(property="departemen_id", type="integer", example=1),
+     *             @OA\Property(property="nama", type="string", example="Lis"),
      *             @OA\Property(property="jabatan", type="string", example="Manager"),
-     *             @OA\Property(property="gaji_pokok", type="number", example=5000000),
-     *             @OA\Property(property="email", type="string", example="john@example.com")
+     *             @OA\Property(property="gaji_pokok", type="number", example="8.00"),
+     *             @OA\Property(property="email", type="string", example="lis@gmail.com"),
+     *             @OA\Property(property="alamat", type="string", example="kober, purwokerto"),
+     *             @OA\Property(property="no_telepon", type="string", example="0821323545122")
      *         )
      *     ),
      *     @OA\Response(

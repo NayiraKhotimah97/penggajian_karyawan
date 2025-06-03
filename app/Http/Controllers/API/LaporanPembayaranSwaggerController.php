@@ -49,8 +49,8 @@ class LaporanPembayaranSwaggerController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             required={"periode_Laporan", "jumlah_karyawan", "total_pengeluaran", "rata_rata"},
-     *             @OA\Property(property="periode_Laporan", type="string", format="date", example="2025-04-01"),
+     *             required={"periode_laporan", "jumlah_karyawan", "total_pengeluaran", "rata_rata"},
+     *             @OA\Property(property="periode_laporan", type="string", format="date", example="2025-04-01"),
      *             @OA\Property(property="jumlah_karyawan", type="string", example="10"),
      *             @OA\Property(property="total_pengeluaran", type="string", example="15000000"),
      *             @OA\Property(property="rata_rata", type="string", example="1500000")
@@ -117,7 +117,7 @@ class LaporanPembayaranSwaggerController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             @OA\Property(property="periode_Laporan", type="string", format="date", example="2025-04-01"),
+     *             @OA\Property(property="periode_laporan", type="string", format="date", example="2025-04-01"),
      *             @OA\Property(property="jumlah_karyawan", type="string", example="12"),
      *             @OA\Property(property="total_pengeluaran", type="string", example="18000000"),
      *             @OA\Property(property="rata_rata", type="string", example="1500000")
