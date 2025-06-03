@@ -92,6 +92,8 @@ Route::group([], function () {
     Route::get('absensi/{id}', [AbsensiSwaggerController::class, 'show']);
     Route::put('absensi/{id}', [AbsensiSwaggerController::class, 'update']);
     Route::delete('absensi/{id}', [AbsensiSwaggerController::class, 'destroy']);
+    Route::get('/absensis/karyawan/{karyawan_id}', [AbsensiSwaggerController::class, 'getByKaryawan']);
+    Route::get('/absensis/tanggal/{tanggal}', [AbsensiSwaggerController::class, 'getByTanggal']);
 });
 
 Route::group([], function () {
@@ -100,6 +102,7 @@ Route::group([], function () {
     Route::get('gajis/{gaji}', [GajiSwaggerController::class, 'show']);
     Route::put('gajis/{gaji}', [GajiSwaggerController::class, 'update']);
     Route::delete('gajis/{gaji}', [GajiSwaggerController::class, 'destroy']);
+    Route::get('gajis/karyawan/{karyawan_id}', [GajiSwaggerController::class, 'getByKaryawan']); // Tambahkan ini
 });
 
 Route::group([], function () {
@@ -121,11 +124,12 @@ Route::group([], function () {
 });
 
 Route::group([], function () {
-    Route::get('departemens', [DepartemenSwaggerController::class, 'index']);
-    Route::post('departemens', [DepartemenSwaggerController::class, 'store']);
-    Route::get('departemens/{id}', [DepartemenSwaggerController::class, 'show']);
-    Route::put('departemens/{id}', [DepartemenSwaggerController::class, 'update']);
-    Route::delete('departemens/{id}', [DepartemenSwaggerController::class, 'destroy']);
+    Route::get('departemen-swagger', [DepartemenSwaggerController::class, 'index']);
+    Route::post('departemen-swagger', [DepartemenSwaggerController::class, 'store']);
+    Route::get('departemen-swagger/{id}', [DepartemenSwaggerController::class, 'show']);
+    Route::put('departemen-swagger/{id}', [DepartemenSwaggerController::class, 'update']);
+    Route::delete('departemen-swagger/{id}', [DepartemenSwaggerController::class, 'destroy']);
+    Route::get('departemen-swagger/{id}/karyawan', [DepartemenSwaggerController::class, 'getKaryawanByDepartemen']);
 });
 
 

@@ -187,4 +187,30 @@ class GajiSwaggerController extends Controller
         $gaji->delete();
         return response()->json(null, 204);
     }
+
+    /**
+     * @OA\Get(
+     *     path="/gajis/karyawan/{karyawan_id}",
+     *     tags={"Gaji"},
+     *     summary="List gaji berdasarkan karyawan",
+     *     description="Menampilkan daftar gaji berdasarkan ID karyawan",
+     *     @OA\Parameter(
+     *         name="karyawan_id",
+     *         in="path",
+     *         required=true,
+     *         description="ID karyawan",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Berhasil mendapatkan data gaji berdasarkan karyawan",
+     *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/Gaji"))
+     *     )
+     * )
+     */
+    public function getByKaryawan($karyawan_id)
+    {
+        $gajis = Gaji::where('karyawan_id', $karyawan_id)->with('karyawan')->get();
+        return response()->json($gajis);
+    }
 }

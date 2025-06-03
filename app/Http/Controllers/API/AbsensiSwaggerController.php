@@ -183,4 +183,56 @@ class AbsensiSwaggerController extends Controller
         $absensi->delete();
         return response()->json(null, 204);
     }
+
+    /**
+     * @OA\Get(
+     *     path="/absensis/karyawan/{karyawan_id}",
+     *     tags={"Absensi"},
+     *     summary="List absensi by karyawan",
+     *     description="Menampilkan daftar absensi berdasarkan ID karyawan",
+     *     @OA\Parameter(
+     *         name="karyawan_id",
+     *         in="path",
+     *         required=true,
+     *         description="ID karyawan",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Berhasil mendapatkan data absensi",
+     *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/Absensi"))
+     *     )
+     * )
+     */
+    public function getByKaryawan($karyawan_id)
+    {
+        $absensis = Absensi::where('karyawan_id', $karyawan_id)->get();
+        return response()->json($absensis);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/absensis/tanggal/{tanggal}",
+     *     tags={"Absensi"},
+     *     summary="List absensi by tanggal",
+     *     description="Menampilkan daftar absensi berdasarkan tanggal",
+     *     @OA\Parameter(
+     *         name="tanggal",
+     *         in="path",
+     *         required=true,
+     *         description="Tanggal absensi (format: YYYY-MM-DD)",
+     *         @OA\Schema(type="string", format="date")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Berhasil mendapatkan data absensi",
+     *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/Absensi"))
+     *     )
+     * )
+     */
+    public function getByTanggal($tanggal)
+    {
+        $absensis = Absensi::where('tanggal', $tanggal)->get();
+        return response()->json($absensis);
+    }
 }

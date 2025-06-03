@@ -239,6 +239,79 @@
                 }
             }
         },
+        "/absensis/karyawan/{karyawan_id}": {
+            "get": {
+                "tags": [
+                    "Absensi"
+                ],
+                "summary": "List absensi by karyawan",
+                "description": "Menampilkan daftar absensi berdasarkan ID karyawan",
+                "operationId": "0391720536c0ceef834f04ce65b222ea",
+                "parameters": [
+                    {
+                        "name": "karyawan_id",
+                        "in": "path",
+                        "description": "ID karyawan",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Berhasil mendapatkan data absensi",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Absensi"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/absensis/tanggal/{tanggal}": {
+            "get": {
+                "tags": [
+                    "Absensi"
+                ],
+                "summary": "List absensi by tanggal",
+                "description": "Menampilkan daftar absensi berdasarkan tanggal",
+                "operationId": "4591c035b6090fc0c597206ddf138577",
+                "parameters": [
+                    {
+                        "name": "tanggal",
+                        "in": "path",
+                        "description": "Tanggal absensi (format: YYYY-MM-DD)",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Berhasil mendapatkan data absensi",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Absensi"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/category": {
             "get": {
                 "tags": [
@@ -273,13 +346,13 @@
                 }
             }
         },
-        "/api/departemen-swagger": {
+        "/departemen-swagger": {
             "get": {
                 "tags": [
                     "DepartemenSwagger"
                 ],
-                "summary": "Menampilkan semua departemen (simulasi)",
-                "operationId": "53a963e7488cdab3cd4c4efa707a21b4",
+                "summary": "Menampilkan semua departemen",
+                "operationId": "01b3bd4684a21c78807dd561b9fdc36f",
                 "responses": {
                     "200": {
                         "description": "Data departemen ditemukan"
@@ -293,8 +366,8 @@
                 "tags": [
                     "DepartemenSwagger"
                 ],
-                "summary": "Membuat departemen baru (simulasi)",
-                "operationId": "ac739f04e4c32e1b8dfc5f7a5c1de012",
+                "summary": "Membuat departemen baru",
+                "operationId": "f2800d036c5925cebdae80de015959df",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -338,13 +411,13 @@
                 }
             }
         },
-        "/api/departemen-swagger/{id}": {
+        "/departemen-swagger/{id}": {
             "get": {
                 "tags": [
                     "DepartemenSwagger"
                 ],
                 "summary": "Menampilkan detail departemen",
-                "operationId": "e53afced54200f188d0ed871bd84c098",
+                "operationId": "36e7c6c5922edfa89f03ee247bb4118b",
                 "parameters": [
                     {
                         "name": "id",
@@ -371,8 +444,8 @@
                 "tags": [
                     "DepartemenSwagger"
                 ],
-                "summary": "Memperbarui departemen (simulasi)",
-                "operationId": "c779f02360800e3e64421541116942e1",
+                "summary": "Memperbarui departemen",
+                "operationId": "8f4b98fff21e577a35f595fe1b1960c8",
                 "parameters": [
                     {
                         "name": "id",
@@ -425,8 +498,8 @@
                 "tags": [
                     "DepartemenSwagger"
                 ],
-                "summary": "Menghapus departemen (simulasi)",
-                "operationId": "c25ac20c4bdfd34fbe93798d1df903c3",
+                "summary": "Menghapus departemen",
+                "operationId": "17deb7dd49becb24b464e519d3164392",
                 "parameters": [
                     {
                         "name": "id",
@@ -446,6 +519,33 @@
                     },
                     "500": {
                         "description": "Kesalahan server"
+                    }
+                }
+            }
+        },
+        "/departemen-swagger/{id}/karyawan": {
+            "get": {
+                "tags": [
+                    "DepartemenSwagger"
+                ],
+                "summary": "Menampilkan detail departemen beserta karyawannya",
+                "operationId": "ecc232475822309392f48f81cf485053",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Data ditemukan"
+                    },
+                    "404": {
+                        "description": "Departemen tidak ditemukan"
                     }
                 }
             }
@@ -683,6 +783,42 @@
                 "responses": {
                     "204": {
                         "description": "Berhasil menghapus data gaji"
+                    }
+                }
+            }
+        },
+        "/gajis/karyawan/{karyawan_id}": {
+            "get": {
+                "tags": [
+                    "Gaji"
+                ],
+                "summary": "List gaji berdasarkan karyawan",
+                "description": "Menampilkan daftar gaji berdasarkan ID karyawan",
+                "operationId": "10ed44a85c9ba48384a707e0cbc68aa5",
+                "parameters": [
+                    {
+                        "name": "karyawan_id",
+                        "in": "path",
+                        "description": "ID karyawan",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Berhasil mendapatkan data gaji berdasarkan karyawan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Gaji"
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
