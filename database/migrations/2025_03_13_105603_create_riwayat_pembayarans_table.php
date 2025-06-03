@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('riwayat_pembayarans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_gaji')->constrained('gajis')->onDelet;
+            $table->foreignId('id_gaji')->constrained('gajis')->onDelete('cascade');
             $table->string('metode_pembayaran');
             $table->string('tanggal_pembayaran');
             $table->string('nominal_pembayaran');

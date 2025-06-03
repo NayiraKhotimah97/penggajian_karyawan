@@ -69,4 +69,11 @@ class KaryawanController extends Controller
         $karyawans = Karyawan::where('departemen_id', $departemen_id)->get();
         return response()->json($karyawans);
     }
+
+    // Mencari karyawan berdasarkan nama (partial match)
+    public function searchByName($nama)
+    {
+        $karyawans = Karyawan::where('nama', 'like', '%' . $nama . '%')->get();
+        return response()->json($karyawans);
+    }
 }

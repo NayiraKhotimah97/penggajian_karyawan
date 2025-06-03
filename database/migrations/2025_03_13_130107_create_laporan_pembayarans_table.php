@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('laporan_pembayarans', function (Blueprint $table) {
             $table->id();
-            $table->date('periode_Laporan')->nullable();
+            $table->date('periode_laporan')->nullable();
             $table->string('jumlah_karyawan');
             $table->string('total_pengeluaran');
             $table->string('rata_rata');
