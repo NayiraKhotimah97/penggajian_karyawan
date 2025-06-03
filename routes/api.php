@@ -111,9 +111,16 @@ Route::group([], function () {
     Route::get('karyawans/{karyawan}', [KaryawanSwaggerController::class, 'show']);
     Route::put('karyawans/{karyawan}', [KaryawanSwaggerController::class, 'update']);
     Route::delete('karyawans/{karyawan}', [KaryawanSwaggerController::class, 'destroy']);
+    // Tambahan:
+    Route::get('karyawans/departemen/{departemen_id}', [KaryawanSwaggerController::class, 'getByDepartemen']);
+    Route::get('karyawans/search/{nama}', [KaryawanSwaggerController::class, 'searchByName']);
 });
 
 Route::apiResource('laporan-pembayaran', LaporanPembayaranSwaggerController::class);
+
+// Tambahan route agar sama dengan controller non-swagger
+Route::get('laporan-pembayarans/periode/{periode}', [LaporanPembayaranSwaggerController::class, 'getByPeriode']);
+Route::get('laporan-pembayarans/total-pengeluaran/{total}', [LaporanPembayaranSwaggerController::class, 'getTotalPengeluaran']);
 
 Route::group([], function () {
     Route::get('riwayat-pembayarans', [RiwayatPembayaranSwaggerController::class, 'index']);
@@ -121,6 +128,9 @@ Route::group([], function () {
     Route::get('riwayat-pembayarans/{id}', [RiwayatPembayaranSwaggerController::class, 'show']);
     Route::put('riwayat-pembayarans/{id}', [RiwayatPembayaranSwaggerController::class, 'update']);
     Route::delete('riwayat-pembayarans/{id}', [RiwayatPembayaranSwaggerController::class, 'destroy']);
+    // Tambahan:
+    Route::get('riwayat-pembayarans/tanggal/{tanggal}', [RiwayatPembayaranSwaggerController::class, 'getByTanggal']);
+    Route::get('riwayat-pembayarans/by-nominal/{nominal}', [RiwayatPembayaranSwaggerController::class, 'getByNominal']);
 });
 
 Route::group([], function () {

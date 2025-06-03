@@ -167,4 +167,61 @@ class LaporanPembayaranSwaggerController extends Controller
         $laporanPembayaran->delete();
         return response()->json(null, 204);
     }
+
+    /**
+     * @OA\Get(
+     *     path="/laporan-pembayarans/periode/{periode}",
+     *     tags={"Laporan Pembayaran"},
+     *     summary="Ambil laporan berdasarkan periode (YYYY-MM)",
+     *     @OA\Parameter(
+     *         name="periode",
+     *         in="path",
+     *         required=true,
+     *         description="Periode format YYYY-MM",
+     *         @OA\Schema(type="string", example="2025-06")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Laporan berdasarkan periode",
+     *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/LaporanPembayaran"))
+     *     ),
+     *     @OA\Response(response=422, description="Format periode tidak valid")
+     * )
+     */
+    public function getByPeriode($periode)
+    {
+        if (!preg_match('/^\d{4}-\d{2}$/', $periode)) {
+            return response()->json(['error' => 'Format periode tidak valid (Y-m)'], 422);
+        }
+
+        $laporan = LaporanPembayaran::whereRaw("DATE_FORMAT(periode_Laporan, '%Y-%m') = ?", [$periode])->get();
+
+        return response()->json($laporan);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/laporan-pembayarans/total-pengeluaran/{total}",
+     *     tags={"Laporan Pembayaran"},
+     *     summary="Ambil laporan berdasarkan total pengeluaran",
+     *     @OA\Parameter(
+     *         name="total",
+     *         in="path",
+     *         required=true,
+     *         description="Total pengeluaran",
+     *         @OA\Schema(type="string", example="15000000")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Laporan berdasarkan total pengeluaran",
+     *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/LaporanPembayaran"))
+     *     )
+     * )
+     */
+    public function getTotalPengeluaran($total)
+    {
+        $laporan = LaporanPembayaran::where('total_pengeluaran', $total)->get();
+
+        return response()->json($laporan);
+    }
 }

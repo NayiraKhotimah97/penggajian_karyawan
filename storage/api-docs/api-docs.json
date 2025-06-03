@@ -1027,6 +1027,84 @@
                 }
             }
         },
+        "/karyawans/departemen/{departemen_id}": {
+            "get": {
+                "tags": [
+                    "Karyawan"
+                ],
+                "summary": "Get karyawan by departemen",
+                "description": "Menampilkan daftar karyawan berdasarkan ID departemen",
+                "operationId": "c62078d755c7456616647f6b22fd1a66",
+                "parameters": [
+                    {
+                        "name": "departemen_id",
+                        "in": "path",
+                        "description": "ID departemen",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Berhasil mendapatkan data karyawan berdasarkan departemen",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Karyawan"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Departemen not found"
+                    }
+                }
+            }
+        },
+        "/karyawans/search/{nama}": {
+            "get": {
+                "tags": [
+                    "Karyawan"
+                ],
+                "summary": "Search karyawan by name",
+                "description": "Mencari karyawan berdasarkan nama",
+                "operationId": "365a9f38c2de173c0b3f98db7684e727",
+                "parameters": [
+                    {
+                        "name": "nama",
+                        "in": "path",
+                        "description": "Nama karyawan",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Berhasil menemukan karyawan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Karyawan"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Karyawan not found"
+                    }
+                }
+            }
+        },
         "/laporan-pembayarans": {
             "get": {
                 "tags": [
@@ -1218,6 +1296,81 @@
                 "responses": {
                     "204": {
                         "description": "Laporan berhasil dihapus"
+                    }
+                }
+            }
+        },
+        "/laporan-pembayarans/periode/{periode}": {
+            "get": {
+                "tags": [
+                    "Laporan Pembayaran"
+                ],
+                "summary": "Ambil laporan berdasarkan periode (YYYY-MM)",
+                "operationId": "1da8401af8ef1f70973b2542e2ccf972",
+                "parameters": [
+                    {
+                        "name": "periode",
+                        "in": "path",
+                        "description": "Periode format YYYY-MM",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "2025-06"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Laporan berdasarkan periode",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/LaporanPembayaran"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Format periode tidak valid"
+                    }
+                }
+            }
+        },
+        "/laporan-pembayarans/total-pengeluaran/{total}": {
+            "get": {
+                "tags": [
+                    "Laporan Pembayaran"
+                ],
+                "summary": "Ambil laporan berdasarkan total pengeluaran",
+                "operationId": "07fedfd2c41b5cc6f579ceb622c95ef4",
+                "parameters": [
+                    {
+                        "name": "total",
+                        "in": "path",
+                        "description": "Total pengeluaran",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "15000000"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Laporan berdasarkan total pengeluaran",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/LaporanPembayaran"
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -1415,6 +1568,81 @@
                 "responses": {
                     "204": {
                         "description": "Berhasil menghapus riwayat pembayaran"
+                    }
+                }
+            }
+        },
+        "/riwayat-pembayarans/tanggal/{tanggal}": {
+            "get": {
+                "tags": [
+                    "Riwayat Pembayaran"
+                ],
+                "summary": "Ambil riwayat pembayaran berdasarkan tanggal",
+                "operationId": "d376c80fb810ec71fb6caed02e307ddf",
+                "parameters": [
+                    {
+                        "name": "tanggal",
+                        "in": "path",
+                        "description": "Tanggal pembayaran (YYYY-MM-DD)",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "2025-04-29"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Data riwayat pembayaran berdasarkan tanggal",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/RiwayatPembayaran"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/riwayat-pembayarans/by-nominal/{nominal}": {
+            "get": {
+                "tags": [
+                    "Riwayat Pembayaran"
+                ],
+                "summary": "Ambil riwayat pembayaran berdasarkan nominal",
+                "operationId": "8073bb8a217cae690cd9109a7afc8852",
+                "parameters": [
+                    {
+                        "name": "nominal",
+                        "in": "path",
+                        "description": "Nominal pembayaran",
+                        "required": true,
+                        "schema": {
+                            "type": "number",
+                            "example": 4500000
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Data riwayat pembayaran berdasarkan nominal",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/RiwayatPembayaran"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Data tidak ditemukan"
                     }
                 }
             }

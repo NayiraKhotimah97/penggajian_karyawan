@@ -68,10 +68,13 @@ class KaryawanSwaggerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'departemen_id' => 'required|exists:departemens,id',
             'nama' => 'required|string|max:255',
             'jabatan' => 'required|string|max:255',
             'gaji_pokok' => 'required|numeric|unique:karyawans,gaji_pokok',
             'email' => 'required|email|unique:karyawans,email',
+            'alamat' => 'nullable|string',
+            'no_telepon' => 'nullable|string|max:20',
         ]);
 
         $karyawan = Karyawan::create($request->all());
@@ -138,10 +141,13 @@ class KaryawanSwaggerController extends Controller
     public function update(Request $request, Karyawan $karyawan)
     {
         $request->validate([
+            'departemen_id' => 'sometimes|required|exists:departemens,id',
             'nama' => 'sometimes|required|string|max:255',
             'jabatan' => 'sometimes|required|string|max:255',
             'gaji_pokok' => 'sometimes|required|numeric|unique:karyawans,gaji_pokok,' . $karyawan->id,
             'email' => 'sometimes|required|email|unique:karyawans,email,' . $karyawan->id,
+            'alamat' => 'nullable|string',
+            'no_telepon' => 'nullable|string|max:20',
         ]);
 
         $karyawan->update($request->all());
@@ -172,5 +178,59 @@ class KaryawanSwaggerController extends Controller
     {
         $karyawan->delete();
         return response()->json(null, 204);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/karyawans/departemen/{departemen_id}",
+     *     tags={"Karyawan"},
+     *     summary="Get karyawan by departemen",
+     *     description="Menampilkan daftar karyawan berdasarkan ID departemen",
+     *     @OA\Parameter(
+     *         name="departemen_id",
+     *         in="path",
+     *         required=true,
+     *         description="ID departemen",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Berhasil mendapatkan data karyawan berdasarkan departemen",
+     *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/Karyawan"))
+     *     ),
+     *     @OA\Response(response=404, description="Departemen not found")
+     * )
+     */
+    public function getByDepartemen($departemen_id)
+    {
+        $karyawans = Karyawan::where('departemen_id', $departemen_id)->get();
+        return response()->json($karyawans);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/karyawans/search/{nama}",
+     *     tags={"Karyawan"},
+     *     summary="Search karyawan by name",
+     *     description="Mencari karyawan berdasarkan nama",
+     *     @OA\Parameter(
+     *         name="nama",
+     *         in="path",
+     *         required=true,
+     *         description="Nama karyawan",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Berhasil menemukan karyawan",
+     *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/Karyawan"))
+     *     ),
+     *     @OA\Response(response=404, description="Karyawan not found")
+     * )
+     */
+    public function searchByName($nama)
+    {
+        $karyawans = Karyawan::where('nama', 'like', '%' . $nama . '%')->get();
+        return response()->json($karyawans);
     }
 }

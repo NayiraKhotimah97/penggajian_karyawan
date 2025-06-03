@@ -171,4 +171,60 @@ class RiwayatPembayaranSwaggerController extends Controller
         $riwayatPembayaran->delete();
         return response()->json(null, 204);
     }
+
+    /**
+     * @OA\Get(
+     *     path="/riwayat-pembayarans/tanggal/{tanggal}",
+     *     tags={"Riwayat Pembayaran"},
+     *     summary="Ambil riwayat pembayaran berdasarkan tanggal",
+     *     @OA\Parameter(
+     *         name="tanggal",
+     *         in="path",
+     *         required=true,
+     *         description="Tanggal pembayaran (YYYY-MM-DD)",
+     *         @OA\Schema(type="string", example="2025-04-29")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Data riwayat pembayaran berdasarkan tanggal",
+     *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/RiwayatPembayaran"))
+     *     )
+     * )
+     */
+    public function getByTanggal($tanggal)
+    {
+        $riwayat = RiwayatPembayaran::whereDate('tanggal_pembayaran', $tanggal)->get();
+        return response()->json($riwayat);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/riwayat-pembayarans/by-nominal/{nominal}",
+     *     tags={"Riwayat Pembayaran"},
+     *     summary="Ambil riwayat pembayaran berdasarkan nominal",
+     *     @OA\Parameter(
+     *         name="nominal",
+     *         in="path",
+     *         required=true,
+     *         description="Nominal pembayaran",
+     *         @OA\Schema(type="number", example=4500000)
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Data riwayat pembayaran berdasarkan nominal",
+     *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/RiwayatPembayaran"))
+     *     ),
+     *     @OA\Response(response=404, description="Data tidak ditemukan")
+     * )
+     */
+    public function getByNominal($nominal)
+    {
+        $riwayat = RiwayatPembayaran::where('nominal_pembayaran', $nominal)->get();
+
+        if ($riwayat->isEmpty()) {
+            return response()->json(['message' => 'Data tidak ditemukan'], 404);
+        }
+
+        return response()->json($riwayat);
+    }
 }
