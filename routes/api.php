@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\API\AbsensiSwaggerController;
-use App\Http\Controllers\API\CategorySwaggerController;
 use App\Http\Controllers\API\GajiSwaggerController;
 use App\Http\Controllers\API\KaryawanSwaggerController;
 use App\Http\Controllers\API\LaporanPembayaranSwaggerController;
@@ -82,10 +81,6 @@ Route::group([], function () {
 
 
 // SWAGGER CONTROLLER ROUTE
-Route::group([], function () {
-    Route::get('category', [CategorySwaggerController::class, 'listCategory']);
-});
-
 Route::group([], function () {
     Route::get('absensi', [AbsensiSwaggerController::class, 'index']);
     Route::post('absensi', [AbsensiSwaggerController::class, 'store']);
