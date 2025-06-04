@@ -1917,7 +1917,11 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Succesfully Logout"
+                                            "example": "Successfully Logout"
+                                        },
+                                        "token": {
+                                            "type": "string",
+                                            "example": "Token 1 has been revoked"
                                         }
                                     },
                                     "type": "object"

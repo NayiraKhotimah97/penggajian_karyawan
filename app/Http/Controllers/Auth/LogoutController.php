@@ -15,7 +15,7 @@ class LogoutController extends Controller
      *     bearerFormat="JWT"
      * )
      */
-    
+
     /**
      * @OA\Post(
      *     path="/logout",
@@ -26,7 +26,8 @@ class LogoutController extends Controller
      *         response=200,
      *         description="Berhasil logout",
      *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="Succesfully Logout")
+     *             @OA\Property(property="message", type="string", example="Successfully Logout"),
+     *             @OA\Property(property="token", type="string", example="Token 1 has been revoked")
      *         )
      *     ),
      *     @OA\Response(
@@ -40,8 +41,13 @@ class LogoutController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $request->user()->currentAccessToken()->delete();
+        $token = $request->user()->currentAccessToken();
+        $tokenId = $token->id;
+        $token->delete();
 
-        return response()->json(['message' => 'Succesfully Logout']);
+        return response()->json([
+            'message' => 'Successfully Logout',
+            'token' => "Token {$tokenId} has been revoked"
+        ]);
     }
 }
