@@ -29,6 +29,7 @@ class AbsensiSwaggerController extends Controller
      *     tags={"Absensi"},
      *     summary="List all absensi",
      *     description="Menampilkan daftar semua absensi",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Response(
      *         response=200,
      *         description="Berhasil mendapatkan data absensi",
@@ -38,7 +39,6 @@ class AbsensiSwaggerController extends Controller
      */
     public function index()
     {
-        // Ambil semua data absensi dari database
         $absensis = Absensi::all();
         return response()->json($absensis);
     }
@@ -49,6 +49,7 @@ class AbsensiSwaggerController extends Controller
      *     tags={"Absensi"},
      *     summary="Create new absensi",
      *     description="Membuat data absensi baru",
+     *     security={{"bearerAuth":{}}},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -69,7 +70,6 @@ class AbsensiSwaggerController extends Controller
      */
     public function store(Request $request)
     {
-        // Validasi data yang diterima
         $request->validate([
             'karyawan_id' => 'required|exists:karyawans,id',
             'tanggal' => 'required|date',
@@ -78,7 +78,6 @@ class AbsensiSwaggerController extends Controller
             'total_jam_kerja' => 'required|numeric',
         ]);
 
-        // Menyimpan data absensi baru
         $absensi = Absensi::create($request->all());
 
         return response()->json($absensi, 201);
@@ -90,6 +89,7 @@ class AbsensiSwaggerController extends Controller
      *     tags={"Absensi"},
      *     summary="Show a specific absensi",
      *     description="Menampilkan detail absensi berdasarkan ID",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="absensi",
      *         in="path",
@@ -116,6 +116,7 @@ class AbsensiSwaggerController extends Controller
      *     tags={"Absensi"},
      *     summary="Update a specific absensi",
      *     description="Memperbarui data absensi berdasarkan ID",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="absensi",
      *         in="path",
@@ -143,7 +144,6 @@ class AbsensiSwaggerController extends Controller
      */
     public function update(Request $request, Absensi $absensi)
     {
-        // Validasi data yang diterima
         $request->validate([
             'karyawan_id' => 'required|exists:karyawans,id',
             'tanggal' => 'required|date',
@@ -152,7 +152,6 @@ class AbsensiSwaggerController extends Controller
             'total_jam_kerja' => 'required|numeric',
         ]);
 
-        // Update data absensi
         $absensi->update($request->all());
 
         return response()->json($absensi);
@@ -164,6 +163,7 @@ class AbsensiSwaggerController extends Controller
      *     tags={"Absensi"},
      *     summary="Delete a specific absensi",
      *     description="Menghapus data absensi berdasarkan ID",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="absensi",
      *         in="path",
@@ -179,7 +179,6 @@ class AbsensiSwaggerController extends Controller
      */
     public function destroy(Absensi $absensi)
     {
-        // Hapus data absensi
         $absensi->delete();
         return response()->json(null, 204);
     }
@@ -190,6 +189,7 @@ class AbsensiSwaggerController extends Controller
      *     tags={"Absensi"},
      *     summary="List absensi by karyawan",
      *     description="Menampilkan daftar absensi berdasarkan ID karyawan",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="karyawan_id",
      *         in="path",
@@ -216,6 +216,7 @@ class AbsensiSwaggerController extends Controller
      *     tags={"Absensi"},
      *     summary="List absensi by tanggal",
      *     description="Menampilkan daftar absensi berdasarkan tanggal",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="tanggal",
      *         in="path",

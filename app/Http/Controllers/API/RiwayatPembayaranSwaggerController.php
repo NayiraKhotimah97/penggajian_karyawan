@@ -29,6 +29,7 @@ class RiwayatPembayaranSwaggerController extends Controller
      *     tags={"Riwayat Pembayaran"},
      *     summary="List all riwayat pembayaran",
      *     description="Menampilkan daftar semua riwayat pembayaran beserta data gaji",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Response(
      *         response=200,
      *         description="Berhasil mendapatkan daftar riwayat pembayaran",
@@ -48,6 +49,7 @@ class RiwayatPembayaranSwaggerController extends Controller
      *     tags={"Riwayat Pembayaran"},
      *     summary="Create new riwayat pembayaran",
      *     description="Membuat data riwayat pembayaran baru",
+     *     security={{"bearerAuth":{}}},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -85,6 +87,7 @@ class RiwayatPembayaranSwaggerController extends Controller
      *     tags={"Riwayat Pembayaran"},
      *     summary="Show detail riwayat pembayaran",
      *     description="Menampilkan detail riwayat pembayaran berdasarkan ID",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -110,6 +113,7 @@ class RiwayatPembayaranSwaggerController extends Controller
      *     tags={"Riwayat Pembayaran"},
      *     summary="Update riwayat pembayaran",
      *     description="Memperbarui data riwayat pembayaran",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -153,6 +157,7 @@ class RiwayatPembayaranSwaggerController extends Controller
      *     tags={"Riwayat Pembayaran"},
      *     summary="Delete riwayat pembayaran",
      *     description="Menghapus data riwayat pembayaran berdasarkan ID",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -177,6 +182,7 @@ class RiwayatPembayaranSwaggerController extends Controller
      *     path="/riwayat-pembayarans/tanggal/{tanggal}",
      *     tags={"Riwayat Pembayaran"},
      *     summary="Ambil riwayat pembayaran berdasarkan tanggal",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="tanggal",
      *         in="path",
@@ -202,6 +208,7 @@ class RiwayatPembayaranSwaggerController extends Controller
      *     path="/riwayat-pembayarans/by-nominal/{nominal}",
      *     tags={"Riwayat Pembayaran"},
      *     summary="Ambil riwayat pembayaran berdasarkan nominal",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="nominal",
      *         in="path",

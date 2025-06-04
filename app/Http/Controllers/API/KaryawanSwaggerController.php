@@ -29,6 +29,7 @@ class KaryawanSwaggerController extends Controller
      *     tags={"Karyawan"},
      *     summary="List all karyawan",
      *     description="Menampilkan daftar semua karyawan",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Response(
      *         response=200,
      *         description="Berhasil mendapatkan data karyawan",
@@ -48,6 +49,7 @@ class KaryawanSwaggerController extends Controller
      *     tags={"Karyawan"},
      *     summary="Create new karyawan",
      *     description="Membuat data karyawan baru",
+     *     security={{"bearerAuth":{}}},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -91,6 +93,7 @@ class KaryawanSwaggerController extends Controller
      *     tags={"Karyawan"},
      *     summary="Show a specific karyawan",
      *     description="Menampilkan detail karyawan berdasarkan ID",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="karyawan",
      *         in="path",
@@ -117,6 +120,7 @@ class KaryawanSwaggerController extends Controller
      *     tags={"Karyawan"},
      *     summary="Update a specific karyawan",
      *     description="Memperbarui data karyawan berdasarkan ID",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="karyawan",
      *         in="path",
@@ -166,6 +170,7 @@ class KaryawanSwaggerController extends Controller
      *     tags={"Karyawan"},
      *     summary="Delete a specific karyawan",
      *     description="Menghapus data karyawan berdasarkan ID",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="karyawan",
      *         in="path",
@@ -191,6 +196,7 @@ class KaryawanSwaggerController extends Controller
      *     tags={"Karyawan"},
      *     summary="Get karyawan by departemen",
      *     description="Menampilkan daftar karyawan berdasarkan ID departemen",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="departemen_id",
      *         in="path",
@@ -218,6 +224,7 @@ class KaryawanSwaggerController extends Controller
      *     tags={"Karyawan"},
      *     summary="Search karyawan by name",
      *     description="Mencari karyawan berdasarkan nama",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="nama",
      *         in="path",

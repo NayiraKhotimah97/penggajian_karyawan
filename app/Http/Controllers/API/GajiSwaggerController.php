@@ -32,6 +32,7 @@ class GajiSwaggerController extends Controller
      *     tags={"Gaji"},
      *     summary="List all gaji",
      *     description="Menampilkan daftar semua data gaji beserta karyawan",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Response(
      *         response=200,
      *         description="Berhasil mendapatkan data gaji",
@@ -51,6 +52,7 @@ class GajiSwaggerController extends Controller
      *     tags={"Gaji"},
      *     summary="Create new gaji",
      *     description="Membuat data gaji baru",
+     *     security={{"bearerAuth":{}}},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -94,6 +96,7 @@ class GajiSwaggerController extends Controller
      *     tags={"Gaji"},
      *     summary="Show specific gaji",
      *     description="Menampilkan detail data gaji berdasarkan ID",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -120,6 +123,7 @@ class GajiSwaggerController extends Controller
      *     tags={"Gaji"},
      *     summary="Update specific gaji",
      *     description="Memperbarui data gaji berdasarkan ID",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -169,6 +173,7 @@ class GajiSwaggerController extends Controller
      *     tags={"Gaji"},
      *     summary="Delete specific gaji",
      *     description="Menghapus data gaji berdasarkan ID",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -194,6 +199,7 @@ class GajiSwaggerController extends Controller
      *     tags={"Gaji"},
      *     summary="List gaji berdasarkan karyawan",
      *     description="Menampilkan daftar gaji berdasarkan ID karyawan",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="karyawan_id",
      *         in="path",

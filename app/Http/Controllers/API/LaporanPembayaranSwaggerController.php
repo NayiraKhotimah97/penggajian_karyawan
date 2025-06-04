@@ -28,6 +28,7 @@ class LaporanPembayaranSwaggerController extends Controller
      *     path="/laporan-pembayarans",
      *     tags={"Laporan Pembayaran"},
      *     summary="List semua laporan pembayaran",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Response(
      *         response=200,
      *         description="Data laporan pembayaran berhasil ditampilkan",
@@ -46,6 +47,7 @@ class LaporanPembayaranSwaggerController extends Controller
      *     path="/laporan-pembayarans",
      *     tags={"Laporan Pembayaran"},
      *     summary="Buat laporan pembayaran baru",
+     *     security={{"bearerAuth":{}}},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -82,6 +84,7 @@ class LaporanPembayaranSwaggerController extends Controller
      *     path="/laporan-pembayarans/{laporanPembayaran}",
      *     tags={"Laporan Pembayaran"},
      *     summary="Detail laporan pembayaran",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="laporanPembayaran",
      *         in="path",
@@ -107,6 +110,7 @@ class LaporanPembayaranSwaggerController extends Controller
      *     path="/laporan-pembayarans/{laporanPembayaran}",
      *     tags={"Laporan Pembayaran"},
      *     summary="Update laporan pembayaran",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="laporanPembayaran",
      *         in="path",
@@ -149,6 +153,7 @@ class LaporanPembayaranSwaggerController extends Controller
      *     path="/laporan-pembayarans/{laporanPembayaran}",
      *     tags={"Laporan Pembayaran"},
      *     summary="Hapus laporan pembayaran",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="laporanPembayaran",
      *         in="path",
@@ -173,6 +178,7 @@ class LaporanPembayaranSwaggerController extends Controller
      *     path="/laporan-pembayarans/periode/{periode}",
      *     tags={"Laporan Pembayaran"},
      *     summary="Ambil laporan berdasarkan periode (YYYY-MM)",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="periode",
      *         in="path",
@@ -204,6 +210,7 @@ class LaporanPembayaranSwaggerController extends Controller
      *     path="/laporan-pembayarans/total-pengeluaran/{total}",
      *     tags={"Laporan Pembayaran"},
      *     summary="Ambil laporan berdasarkan total pengeluaran",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="total",
      *         in="path",

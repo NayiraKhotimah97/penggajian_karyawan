@@ -20,6 +20,7 @@ class DepartemenSwaggerController extends Controller
      *     path="/departemen-swagger",
      *     tags={"DepartemenSwagger"},
      *     summary="Menampilkan semua departemen",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Response(response=200, description="Data departemen ditemukan"),
      *     @OA\Response(response=500, description="Kesalahan server")
      * )
@@ -35,6 +36,7 @@ class DepartemenSwaggerController extends Controller
      *     path="/departemen-swagger",
      *     tags={"DepartemenSwagger"},
      *     summary="Membuat departemen baru",
+     *     security={{"bearerAuth":{}}},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -67,6 +69,7 @@ class DepartemenSwaggerController extends Controller
      *     path="/departemen-swagger/{id}",
      *     tags={"DepartemenSwagger"},
      *     summary="Menampilkan detail departemen",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(name="id", in="path", required=true, @OA\Schema(type="integer")),
      *     @OA\Response(response=200, description="Data departemen ditemukan"),
      *     @OA\Response(response=404, description="Departemen tidak ditemukan"),
@@ -87,6 +90,7 @@ class DepartemenSwaggerController extends Controller
      *     path="/departemen-swagger/{id}",
      *     tags={"DepartemenSwagger"},
      *     summary="Memperbarui departemen",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(name="id", in="path", required=true, @OA\Schema(type="integer")),
      *     @OA\RequestBody(
      *         @OA\JsonContent(
@@ -123,6 +127,7 @@ class DepartemenSwaggerController extends Controller
      *     path="/departemen-swagger/{id}",
      *     tags={"DepartemenSwagger"},
      *     summary="Menghapus departemen",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(name="id", in="path", required=true, @OA\Schema(type="integer")),
      *     @OA\Response(response=204, description="Departemen berhasil dihapus"),
      *     @OA\Response(response=404, description="Departemen tidak ditemukan"),
@@ -144,6 +149,7 @@ class DepartemenSwaggerController extends Controller
      *     path="/departemen-swagger/{id}/karyawan",
      *     tags={"DepartemenSwagger"},
      *     summary="Menampilkan detail departemen beserta karyawannya",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(name="id", in="path", required=true, @OA\Schema(type="integer")),
      *     @OA\Response(response=200, description="Data ditemukan"),
      *     @OA\Response(response=404, description="Departemen tidak ditemukan"),
