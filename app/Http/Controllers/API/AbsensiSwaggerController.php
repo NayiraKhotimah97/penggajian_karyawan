@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Absensi;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 /**
  * @OA\Schema(
@@ -48,17 +49,15 @@ class AbsensiSwaggerController extends Controller
      *     path="/absensis",
      *     tags={"Absensi"},
      *     summary="Create new absensi",
-     *     description="Membuat data absensi baru",
+     *     description="Membuat data absensi baru (hanya karyawan_id, tanggal, jam_masuk)",
      *     security={{"bearerAuth":{}}},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             required={"karyawan_id", "tanggal", "jam_masuk", "jam_keluar", "total_jam_kerja"},
+     *             required={"karyawan_id", "tanggal", "jam_masuk"},
      *             @OA\Property(property="karyawan_id", type="integer", example=2),
      *             @OA\Property(property="tanggal", type="string", format="date", example="2025-04-28"),
-     *             @OA\Property(property="jam_masuk", type="string", format="time", example="08:00"),
-     *             @OA\Property(property="jam_keluar", type="string", format="time", example="17:00"),
-     *             @OA\Property(property="total_jam_kerja", type="number", example=8)
+     *             @OA\Property(property="jam_masuk", type="string", format="time", example="08:00")
      *         )
      *     ),
      *     @OA\Response(
@@ -74,11 +73,15 @@ class AbsensiSwaggerController extends Controller
             'karyawan_id' => 'required|exists:karyawans,id',
             'tanggal' => 'required|date',
             'jam_masuk' => 'required|date_format:H:i',
-            'jam_keluar' => 'required|date_format:H:i',
-            'total_jam_kerja' => 'required|numeric',
         ]);
 
-        $absensi = Absensi::create($request->all());
+        $absensi = Absensi::create([
+            'karyawan_id' => $request->karyawan_id,
+            'tanggal' => $request->tanggal,
+            'jam_masuk' => $request->jam_masuk,
+            'jam_keluar' => null,
+            'total_jam_kerja' => null,
+        ]);
 
         return response()->json($absensi, 201);
     }
@@ -114,8 +117,8 @@ class AbsensiSwaggerController extends Controller
      * @OA\Put(
      *     path="/absensis/{absensi}",
      *     tags={"Absensi"},
-     *     summary="Update a specific absensi",
-     *     description="Memperbarui data absensi berdasarkan ID",
+     *     summary="Update jam_keluar dan hitung total_jam_kerja",
+     *     description="Update absensi untuk pulang kerja, otomatis hitung total_jam_kerja dari jam_masuk dan jam_keluar",
      *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="absensi",
@@ -127,12 +130,9 @@ class AbsensiSwaggerController extends Controller
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             required={"karyawan_id", "tanggal", "jam_masuk", "jam_keluar", "total_jam_kerja"},
+     *             required={"karyawan_id", "jam_keluar"},
      *             @OA\Property(property="karyawan_id", type="integer", example=2),
-     *             @OA\Property(property="tanggal", type="string", format="date", example="2025-04-28"),
-     *             @OA\Property(property="jam_masuk", type="string", format="time", example="08:00"),
-     *             @OA\Property(property="jam_keluar", type="string", format="time", example="17:00"),
-     *             @OA\Property(property="total_jam_kerja", type="number", example=8)
+     *             @OA\Property(property="jam_keluar", type="string", format="time", example="17:00")
      *         )
      *     ),
      *     @OA\Response(
@@ -146,13 +146,40 @@ class AbsensiSwaggerController extends Controller
     {
         $request->validate([
             'karyawan_id' => 'required|exists:karyawans,id',
-            'tanggal' => 'required|date',
-            'jam_masuk' => 'required|date_format:H:i',
             'jam_keluar' => 'required|date_format:H:i',
-            'total_jam_kerja' => 'required|numeric',
         ]);
 
-        $absensi->update($request->all());
+        $jamMasuk = $absensi->jam_masuk;
+        $jamKeluar = $request->jam_keluar;
+
+        // Ambil hanya jam dan menit jika format '08:00:00'
+        if (strlen($jamMasuk) === 8) {
+            $jamMasuk = substr($jamMasuk, 0, 5);
+        }
+
+        // Cek format jam_masuk
+        if (!preg_match('/^\d{2}:\d{2}$/', $jamMasuk)) {
+            return response()->json(['message' => 'Format jam_masuk tidak valid: ' . $jamMasuk], 422);
+        }
+
+        if (!$jamMasuk) {
+            return response()->json(['message' => 'jam_masuk belum diisi pada absensi ini.'], 422);
+        }
+
+        $start = Carbon::createFromFormat('H:i', $jamMasuk);
+        $end = Carbon::createFromFormat('H:i', $jamKeluar);
+
+        // Validasi agar total jam kerja tidak minus
+        if ($end->lessThan($start)) {
+            return response()->json(['message' => 'jam_keluar tidak boleh lebih awal dari jam_masuk.'], 422);
+        }
+
+        $totalJam = $end->floatDiffInHours($start);
+
+        $absensi->update([
+            'jam_keluar' => $jamKeluar,
+            'total_jam_kerja' => $totalJam,
+        ]);
 
         return response()->json($absensi);
     }

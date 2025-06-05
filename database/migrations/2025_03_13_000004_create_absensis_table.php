@@ -12,9 +12,9 @@ class CreateAbsensisTable extends Migration
             $table->id();
             $table->foreignId('karyawan_id')->constrained()->onDelete('cascade');
             $table->date('tanggal');
-            $table->time('jam_masuk');
-            $table->time('jam_keluar');
-            $table->decimal('total_jam_kerja', 5, 2);
+            $table->time('jam_masuk')->nullable();
+            $table->time('jam_keluar')->nullable();
+            $table->decimal('total_jam_kerja', 5, 2)->nullable();
             $table->timestamps();
         });
     }

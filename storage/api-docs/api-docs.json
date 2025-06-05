@@ -53,7 +53,7 @@
                     "Absensi"
                 ],
                 "summary": "Create new absensi",
-                "description": "Membuat data absensi baru",
+                "description": "Membuat data absensi baru (hanya karyawan_id, tanggal, jam_masuk)",
                 "operationId": "5158bede069018867e0f3231cef7a360",
                 "requestBody": {
                     "required": true,
@@ -63,9 +63,7 @@
                                 "required": [
                                     "karyawan_id",
                                     "tanggal",
-                                    "jam_masuk",
-                                    "jam_keluar",
-                                    "total_jam_kerja"
+                                    "jam_masuk"
                                 ],
                                 "properties": {
                                     "karyawan_id": {
@@ -81,15 +79,6 @@
                                         "type": "string",
                                         "format": "time",
                                         "example": "08:00"
-                                    },
-                                    "jam_keluar": {
-                                        "type": "string",
-                                        "format": "time",
-                                        "example": "17:00"
-                                    },
-                                    "total_jam_kerja": {
-                                        "type": "number",
-                                        "example": 8
                                     }
                                 },
                                 "type": "object"
@@ -160,8 +149,8 @@
                 "tags": [
                     "Absensi"
                 ],
-                "summary": "Update a specific absensi",
-                "description": "Memperbarui data absensi berdasarkan ID",
+                "summary": "Update jam_keluar dan hitung total_jam_kerja",
+                "description": "Update absensi untuk pulang kerja, otomatis hitung total_jam_kerja dari jam_masuk dan jam_keluar",
                 "operationId": "cb8681feafc6b560290b8d89ecd47d96",
                 "parameters": [
                     {
@@ -181,34 +170,17 @@
                             "schema": {
                                 "required": [
                                     "karyawan_id",
-                                    "tanggal",
-                                    "jam_masuk",
-                                    "jam_keluar",
-                                    "total_jam_kerja"
+                                    "jam_keluar"
                                 ],
                                 "properties": {
                                     "karyawan_id": {
                                         "type": "integer",
                                         "example": 2
                                     },
-                                    "tanggal": {
-                                        "type": "string",
-                                        "format": "date",
-                                        "example": "2025-04-28"
-                                    },
-                                    "jam_masuk": {
-                                        "type": "string",
-                                        "format": "time",
-                                        "example": "08:00"
-                                    },
                                     "jam_keluar": {
                                         "type": "string",
                                         "format": "time",
                                         "example": "17:00"
-                                    },
-                                    "total_jam_kerja": {
-                                        "type": "number",
-                                        "example": 8
                                     }
                                 },
                                 "type": "object"

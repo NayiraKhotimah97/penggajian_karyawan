@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Absensi;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class AbsensiController extends Controller
 {
@@ -27,11 +28,15 @@ class AbsensiController extends Controller
             'karyawan_id' => 'required|exists:karyawans,id',
             'tanggal' => 'required|date',
             'jam_masuk' => 'required|date_format:H:i',
-            'jam_keluar' => 'required|date_format:H:i',
-            'total_jam_kerja' => 'required|numeric',
         ]);
 
-        $absensi = Absensi::create($request->all());
+        $absensi = Absensi::create([
+            'karyawan_id' => $request->karyawan_id,
+            'tanggal' => $request->tanggal,
+            'jam_masuk' => $request->jam_masuk,
+            'jam_keluar' => null,
+            'total_jam_kerja' => null,
+        ]);
 
         return response()->json($absensi, 201);
     }
@@ -48,18 +53,39 @@ class AbsensiController extends Controller
         // Tidak digunakan dalam API
     }
 
-    // Memperbarui absensi
+    // Memperbarui absensi (isi jam_keluar, hitung total_jam_kerja)
     public function update(Request $request, Absensi $absensi)
     {
         $request->validate([
             'karyawan_id' => 'required|exists:karyawans,id',
-            'tanggal' => 'required|date',
-            'jam_masuk' => 'required|date_format:H:i',
             'jam_keluar' => 'required|date_format:H:i',
-            'total_jam_kerja' => 'required|numeric',
         ]);
 
-        $absensi->update($request->all());
+        $jamMasuk = $absensi->jam_masuk;
+        $jamKeluar = $request->jam_keluar;
+
+        // Ambil hanya jam dan menit
+        if (strlen($jamMasuk) === 8) {
+            $jamMasuk = substr($jamMasuk, 0, 5); // dari '08:00:00' jadi '08:00'
+        }
+
+        // Cek format jam_masuk
+        if (!preg_match('/^\d{2}:\d{2}$/', $jamMasuk)) {
+            return response()->json(['message' => 'Format jam_masuk tidak valid: ' . $jamMasuk], 422);
+        }
+
+        if (!$jamMasuk) {
+            return response()->json(['message' => 'jam_masuk belum diisi pada absensi ini.'], 422);
+        }
+
+        $start = Carbon::createFromFormat('H:i', $jamMasuk);
+        $end = Carbon::createFromFormat('H:i', $jamKeluar);
+        $totalJam = $end->floatDiffInHours($start);
+
+        $absensi->update([
+            'jam_keluar' => $jamKeluar,
+            'total_jam_kerja' => $totalJam,
+        ]);
 
         return response()->json($absensi);
     }
